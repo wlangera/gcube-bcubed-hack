@@ -106,7 +106,7 @@ Simulation, Data cubes, Biodiversity, B-Cubed, Monte-Carlo, R package
 ## Introduction
 Simulation studies offer numerous benefits due to their ability to mimic real-world scenarios in controlled and customizable environments. Ecosystems and biodiversity data are very complex and involve a multitude of interacting factors. Simulations allow researchers to model and understand the complexity of ecological systems by varying parameters such as spatial and/or temporal clustering, species prevalence, etc.
 
-During the B-Cubed Hackathon, we aimed to create a practical simulation framework for biodiversity data cubes. This framework is composed of three steps ([Fig. 1](#Figure_1)):
+During the B-Cubed Hackathon, we aimed to create a practical simulation framework for biodiversity data cubes based on Monte Carlo methods (= based on repeated random sampling). This framework is composed of three steps ([Fig. 1](#Figure_1)):
 
 1. The occurrence process: Simulating occurrences of multiple species distributed in a landscape over a temporal scope. This will depend on the **rarity**, which can differ between species and over time, and their **spatial clustering**, which can differ between species. A challenge for this part is to implement a consistent **spatial and temporal autocorrelation** for simulated species trends.
 2. The detection process: Simulation of a variety of observation processes can generate actual occurrence datasets. Each species has a different **detection probability**. The detection process will also depend on the **sampling effort** which can be different among spatial and temporal dimensions. We can also assign a spatial uncertainty to each observation.
@@ -118,10 +118,60 @@ The simulation framework can be used to assess multiple research questions under
 .Figure}
 
 ## Materials and Methods
+### Technical setup
+It was a priori decided by the first author to build the simulation framework using the R programming language as an R package, where participants could collaborate efficiently with each other via GitHub (https://github.com/).
+A repository for this package was prepared under the name 'simcuber' and a code structure was proposed for the framework (see next section).
 
+### Coding structure
+General coding structure of the package was proposed following preparation of the hackathon by the first author.
+As indicated in the introduction, the simulation framework and thus the R package can be divided into three different processes related to different variables that depend on *species*, *observation*, *space* and *time*.
+
+1. occurrence process
+2. detection process
+3. grid designation process
+
+For grid designation, R code was already available as the function `grid_designation()`. The focus of the hackathon was thus on the occurrence and detection processes.
+
+|   Process  |        Variable        |   Dependency  |
+|------------|------------------------|---------------|
+| occurrence | rarity                 | species, time |
+| occurrence | spatial clustering     | species       |
+| detection  | detection probability  | species       |
+| detection  | sampling effort        | space, time   |
+| detection  | spatial uncertainty    | observation   |
+
+The three processes can be described in three main functions respectively `simulate_occurrences()`, `sample_observations()` and `grid_designation()`. These can depend on multiple supporting functions for example per variable mentioned above or for specific subprocesses (e.g. temporal autocorrelation).
+
+Some pseudocode and ideas were provided for `simulate_occurrences()`, `sample_observations()`:
+
+...
+
+
+
+### Collaboration and division of tasks
+Following the information provided in the previous subsections, four types of tasks were distinguished ([Fig. 2](#Figure_2)).
+
+1. Lowlevel tasks: 
+
+2. Highlevel tasks: 
+
+3. Technical tasks: 
+
+4. Creative tasks: 
+
+![tasks...](./figures/visual_proposal.png){#Figure_2
+.Figure}
+
+Using a Google Form we got an overview of participants' interest in the different tasks, and an idea where potential problems might arise. Tasks were chosen ... *bespreek icebox silicon valley*
+
+Finally, common guidelines for software development (e.g. related to coding style, function naming and unit testing) were mentioned to ensure efficient collaboration as well as future maintenance and development.
+
+deze citatie:
+Huybrechts P, Trekels M, Abraham L, Desmet P (2024). B-Cubed software development guide. https://docs.b-cubed.eu/dev-guide/
 
 ## Results
 
+- incorporation of project 8 and framework for virtualspecies
 
 ## Discussion
 
