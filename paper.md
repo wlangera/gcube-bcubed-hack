@@ -82,7 +82,7 @@ affiliations:
 date: 17 July 2024
 bibliography: paper.bib
 authors_short: Langeraert et al.
-group: Project 2+8
+group: Projects 2+8
 event: Hacking Biodiversity Data Cubes for Policy, Brussels, Belgium, 2024
 biohackathon_name: Hacking Biodiversity Data Cubes for Policy
 biohackathon_url: https://b-cubed.eu/b-cubed-hackathon
