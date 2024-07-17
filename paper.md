@@ -106,8 +106,7 @@ Simulation, Data cubes, Biodiversity, B-Cubed, Monte-Carlo, R package
 ## Introduction
 Simulation studies offer numerous benefits due to their ability to mimic real-world scenarios in controlled and customizable environments. Ecosystems and biodiversity data are very complex and involve a multitude of interacting factors. Simulations allow researchers to model and understand the complexity of ecological systems by varying parameters such as spatial and/or temporal clustering, species prevalence, etc.
 
-During the B-Cubed Hackathon, we aimed to create a simulation framework for biodiversity data cubes using the R programming language. This framework is composed of three steps ([Fig.
-1](#Figure_1)):
+During the B-Cubed Hackathon, we aimed to create a practical simulation framework for biodiversity data cubes. This framework is composed of three steps ([Fig. 1](#Figure_1)):
 
 1. The occurrence process: Simulating occurrences of multiple species distributed in a landscape over a temporal scope. This will depend on the **rarity**, which can differ between species and over time, and their **spatial clustering**, which can differ between species. A challenge for this part is to implement a consistent **spatial and temporal autocorrelation** for simulated species trends.
 2. The detection process: Simulation of a variety of observation processes can generate actual occurrence datasets. Each species has a different **detection probability**. The detection process will also depend on the **sampling effort** which can be different among spatial and temporal dimensions. We can also assign a spatial uncertainty to each observation.
