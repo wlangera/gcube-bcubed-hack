@@ -102,6 +102,7 @@ Simulation, Data cubes, Biodiversity, B-Cubed, Monte-Carlo, R package
 
 ## Abstract
 
+...
 
 ## Introduction
 Simulation studies offer numerous benefits due to their ability to mimic real-world scenarios in controlled and customizable environments. Ecosystems and biodiversity data are very complex and involve a multitude of interacting factors. Simulations allow researchers to model and understand the complexity of ecological systems by varying parameters such as spatial and/or temporal clustering, species prevalence, etc.
@@ -304,15 +305,15 @@ Using a Google Form we got an overview of participants' interest in the differen
 
 ## Results
 ### Collaboration
-Taks were efficiently distributed along the participants ([Fig. 3](#Figure_3)). In total, we collaborated with fourteen people pushing 209 commits to the main branch and 300 commits to all branches. On main, 56 files were changed and there have been 2,856 additions and 373 deletions. By the end of the hackathon, we had a functional pkgdown website ([Fig. 4](#Figure_4)), all CMD checks passed, and we had a code coverage of 67%.
+After discussion with the participants, the R package was renamed to **gcube** which stands for ‘generate cube’ since it can be used to generate biodiversity data cubes from minimal input.
+
+Tasks were efficiently distributed along the participants ([Fig. 3](#Figure_3)). In total, we collaborated with fourteen people pushing 209 commits to the main branch and 300 commits to all branches. On main, 56 files were changed and there have been 2,856 additions and 373 deletions. By the end of the hackathon, we had a functional pkgdown website ([Fig. 4](#Figure_4)), all CMD checks passed, and we had a code coverage of 67%.
 
 ![Scrum board progress during code development. Categories from left to right: 'Ice Box', 'In Progress', 'Review', and 'Complete'. Day 1 was mainly introduction and discussion. Day 2-3 mainly code development. Day 4 was primarily review and pull request merging. Coding ended before the final presentations on day 4 in the afternoon.](./figures/scrum_board.jpg){#Figure_3 .Figure}
 
-![Overview of the gcube pkgdown website.](./figures/pkgdown_site.png){#Figure_4 .Figure}
+![Overview of the **gcube** pkgdown website.](./figures/pkgdown_site.png){#Figure_4 .Figure}
 
-### Package development
-The package was renamed to **gcube** which stands for ‘generate cube’ since it can be used to generate biodiversity data cubes from minimal input.
-
+### R package development
 The biodiversity data cube simulation workflow of **gcube** is divided in three steps or processes:
 
 1.  Occurrence process
@@ -486,7 +487,7 @@ library(dplyr)   # data wrangling
 library(ggplot2) # visualisation with ggplot
 ```
 
-We create a random polygon as input.
+We create an arbitrary polygon as input.
 
 ``` r
 # Create a polygon to simulate occurrences
@@ -498,7 +499,7 @@ ggplot() +
   theme_minimal()
 ```
 
-![](./figures/readme-polygon-1.png){width=500px}
+![](./figures/readme-polygon-1.png){width=400px}
 
 **1. Occurrence process**
 
@@ -522,7 +523,7 @@ ggplot() +
   geom_sf(data = occurrences_df) +
   theme_minimal()
 ```
-![](./figures/readme-simulate-occurrences-1.png){width=500px}
+![](./figures/readme-simulate-occurrences-1.png){width=400px}
 
 **2. Detection process**
 
@@ -546,7 +547,7 @@ ggplot() +
   theme_minimal()
 ```
 
-![](./figures/readme-detect-occurrences-1.png){width=500px}
+![](./figures/readme-detect-occurrences-1.png){width=400px}
 
 We select the detected occurrences and add an uncertainty to these
 observations. This can be done using the `add_coordinate_uncertainty()`
@@ -578,7 +579,7 @@ ggplot() +
   theme_minimal()
 ```
 
-![](./figures/readme-uncertainty-occurrences-1.png){width=500px}
+![](./figures/readme-uncertainty-occurrences-1.png){width=400px}
 
 **3. Grid designation process**
 
@@ -630,7 +631,7 @@ ggplot() +
   theme_minimal()
 ```
 
-![](./figures/readme-grid-designation-1.png){width=500px}
+![](./figures/readme-grid-designation-1.png){width=400px}
 
 The output gives the number of observations per grid cell and minimal
 coordinate uncertainty per grid cell.
@@ -646,10 +647,11 @@ ggplot() +
   theme_minimal()
 ```
 
-![](./figures/readme-visualise-designation-1.png){width=500px}
+![](./figures/readme-visualise-designation-1.png){width=400px}
 
 ## Discussion
 
+...
 
 ## Conclusions and future work
 
