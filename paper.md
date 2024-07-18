@@ -379,6 +379,8 @@ The raster output of `create_spatial_pattern()` is then used as input for `sampl
 
 **2. Detection process**
 
+We have our occurrences, but not all occurrences are generally observed. The detection of occurrences depends on the detection probability of a species and the sampling bias (includes both sampling bias and effort). This process can be simulated using the `sample_observations()` function.
+
 ``` r
 sample_observations(
   occurrences,
@@ -391,9 +393,48 @@ sample_observations(
 )
 ```
 
+Detection probability (`detection_probability`) can be passed as a numeric value between 0 and 1. For sampling bias there are three options that can be specified in `sampling_bias` (cf. @leroy2016virtualspecies).
+
+1. With `"no_bias"`, only the detection probability value will decide whether an occurrence is observed or not. If `detection_probability = 1` and `sampling_bias = c("no_bias")`, all occurrences are detected.
+2. With `"polygon"`, bias weights depend on their location inside or outside a given polygon with a certain bias strength. This is accomplished by the supporting function `apply_polygon_sampling_bias()`.
+
+``` r
+apply_polygon_sampling_bias(
+  occurrences_sf,
+  bias_area,
+  bias_strength = 1
+)
+```
+
+The function adds a sampling bias weight column to an sf object with POINT geometry containing the occurrences (`occurrences_sf`). This column contains the sample probability based on bias strength `bias_strength` within a given polygon `bias_area`. The bias strength is the strength of the bias to be applied in the biased area (as a multiplier). Above 1, the area will be oversampled. Below 1, the area will be undersampled. For example, a value of 50 will result in 50 times more samples within the `bias_area` than outside. Conversely, a value of 0.5 will result in half less samples.
+
+3. With `"manual"`, bias weights depend on their location inside grid cells of a given grid where each cell has its own value. This is accomplished by the supporting function `apply_manual_sampling_bias()`.
+
+``` r
+apply_manual_sampling_bias(
+  occurrences_sf,
+  bias_weight
+)
+```
+
+The function adds a sampling bias weight column to an sf object with POINT geometry containing the occurrences (`occurrences_sf`). This column contains the sample probability based on bias weights within each cell of a given grid layer (`bias_weight`).
+
+`sample_observations()` combines detection probability and sampling bias weight to a single value `p` as a product and uses this to draw for each occurrence from `stats::rbinom(1, 1, p)` to decide whether an occurrence is observed or not.
+
+To mimic real life data collection, we can select observed occurrences and add coordinate uncertainty with the `add_coordinate_uncertainty()` function.
+
+``` r
+add_coordinate_uncertainty(
+  observations,
+  coords_uncertainty_meters = 25
+)
+```
+
+This is done by adding an additional column to the observed occurrences (`observations`). This column contains numeric values (passed to `coords_uncertainty_meters` as one value or a vector of values) indicating the coordinate uncertainty in meters around an observations .
+
 **3. Grid designation process**
 
-This function was already developed by the first author before the hackathon started, but is given here for the sake of completeness.
+Now that we have our observations, we can designate them to a grid while taking into account the coordinate uncertainty in meters around the observation. This function was already developed by the first author before the hackathon started, but is given here for the sake of completeness.
 
 ``` r
 grid_designation(
@@ -407,7 +448,7 @@ grid_designation(
 )
 ```
 
-This function designates observations (`observations`) to cells of a given grid (`grid`) to create a data cube. `id_col` specifies the column name of the column with unique ids for each grid cell. If `id_col = "row_names"` (the default), a new column `id` is created were the row names represent the unique ids. If `aggregate = TRUE` (default), return data cube in aggregated form (grid with number of observations per grid cell). Otherwise, return sampled points in uncertainty circle. #' @param randomisation `"uniform"` or `"normal"`. Randomisation method, specified with `randomisation`, is used for sampling within uncertainty circle around each observation. By default `"uniform"` which means each point uncertainty circle has an equal probability to be selected. The other option is `"normal"` where a point is sampled from a bivariate Normal distribution with means equal to the observation point and the variance equal to (-`coordinateUncertaintyInMeters`^2) / (2 * log(1 - `p_norm`)) such that `p_norm` % of all possible samples from this Normal distribution fall within the uncertainty circle. `p_norm` is only used if `randomisation = "normal"` and has the default value of 0.95.
+This function designates observations (`observations`) to cells of a given grid (`grid`) to create a data cube. `id_col` specifies the column name of the column with unique ids for each grid cell. If `id_col = "row_names"` (the default), a new column `id` is created were the row names represent the unique ids. If `aggregate = TRUE` (default), return data cube in aggregated form (grid with number of observations per grid cell). Otherwise, return sampled points in uncertainty circle. The randomisation method, specified with `randomisation`, is used for sampling within uncertainty circle around each observation. By default `"uniform"` which means each point uncertainty circle has an equal probability to be selected. If no coordinate uncertainty is present, the function takes the point itself for designation. The other option is `"normal"` where a point is sampled from a bivariate Normal distribution with means equal to the observation point and the variance equal to (-`coordinateUncertaintyInMeters`^2) / (2 * log(1 - `p_norm`)) such that `p_norm` % of all possible samples from this Normal distribution fall within the uncertainty circle. `p_norm` is only used if `randomisation = "normal"` and has the default value of 0.95. Uniform is the standard method to create biodiversity data cubes. The normal randomisation is an experimental feature.
 
 ### Incorporation of virtual species to the simulation workflow
 Project 8 originally aimed to address the challenges of incomplete and unreliable biodiversity data which hinder accurate species distribution models (SDMs). By creating virtual species with known ecological characteristics, researchers can simulate and analyse the effects of spatial, temporal, and taxonomic uncertainties. This "virtual ecologist" approach helps quantify sources of error and refine modelling techniques. The ultimate goal is to improve conservation planning, especially for rare or endangered species, by providing more reliable predictions of species distributions under various environmental conditions, including climate change.
@@ -612,6 +653,7 @@ ggplot() +
 
 ## Conclusions and future work
 
+- vignettes
 
 - multispecies
 
