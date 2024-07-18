@@ -299,12 +299,20 @@ Following the information provided in the previous subsections, four types of ta
 Using a Google Form we got an overview of participants' interest in the different tasks, and an idea where a potential lack of coverage might arise. Tasks were divided and followed up via a simple scrum methodology by using sticky notes (coloured by task type) on a board. The board was divided in four parts (from left to right): 'Ice Box', 'In Progress', 'Review', and 'Complete'. The 'Ice Box' is where all the potential tasks and ideas were stored before they were prioritized and selected for development. The 'In Progress' category contains tasks that the team was actively working on during development. The 'Review' category is for tasks that have been completed but are awaiting review, testing, or approval. The 'Complete' category includes tasks that have been reviewed, approved, and finalized. Participants were free to choose and add tasks to the scrum board, indicating the task and their name on the sticky note.
 
 ## Results
+### Collaboration
+
+([Fig. 3](#Figure_3))
+
+![Scrum board progress during code development. Categories from left to right: 'Ice Box', 'In Progress', 'Review', and 'Complete'. Day 1 was mainly introduction and discussion. Day 4 ended before the final presentation in the afternoon.](./figures/scrum_board.jpg){#Figure_3 .Figure}
+
+![Scrum board progress during code development. Categories from left to right: 'Ice Box', 'In Progress', 'Review', and 'Complete'. Day 1 was mainly introduction and discussion. Day 4 ended before the final presentation in the afternoon.](./figures/scrum_board2.jpg){#Figure_4 .Figure width=500px}
+
+### Package development
 Wat allemaal gedaan tegen einde. Pkgdown website met readme, functies met documentation and examples; repo met code coverage enal
 
-### Using virtual species to cope with real problems
+### Incorporation of virtual species to the simulation workflow
 - incorporation of project 8 and framework for virtualspecies
-
-
+- samengevat op meeting achteraf met mensen die ermee bezig waren
 
 ## Discussion
 
