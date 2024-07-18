@@ -294,21 +294,22 @@ Following the information provided in the previous subsections, four types of ta
 | vignettes                      | create vignettes                                                          |
 | ...                            | ...                                                                       |
 
-![Visualisation of the different types of tasks. See text for explanation.](./figures/task_types.png){#Figure_2 .Figure width=500px}
+![Schematic overview of the different types of tasks. See text for explanation.](./figures/task_types.png){#Figure_2 .Figure width=500px}
 
 Using a Google Form we got an overview of participants' interest in the different tasks, and an idea where a potential lack of coverage might arise. Tasks were divided and followed up via a simple scrum methodology by using sticky notes (coloured by task type) on a board. The board was divided in four parts (from left to right): 'Ice Box', 'In Progress', 'Review', and 'Complete'. The 'Ice Box' is where all the potential tasks and ideas were stored before they were prioritized and selected for development. The 'In Progress' category contains tasks that the team was actively working on during development. The 'Review' category is for tasks that have been completed but are awaiting review, testing, or approval. The 'Complete' category includes tasks that have been reviewed, approved, and finalized. Participants were free to choose and add tasks to the scrum board, indicating the task and their name on the sticky note.
 
 ## Results
 ### Collaboration
+Taks were efficiently distributed along the participants ([Fig. 3](#Figure_3)). In total, we collaborated with fourteen people pushing 209 commits to the main branch and 300 commits to all branches. On main, 56 files were changed and there have been 2,856 additions and 373 deletions. By the end of the hackathon, all CMD checks passed and we had a code coverage of 67%.
 
-([Fig. 3](#Figure_3))
-
-![Scrum board progress during code development. Categories from left to right: 'Ice Box', 'In Progress', 'Review', and 'Complete'. Day 1 was mainly introduction and discussion. Day 4 ended before the final presentation in the afternoon.](./figures/scrum_board.jpg){#Figure_3 .Figure}
-
-![Scrum board progress during code development. Categories from left to right: 'Ice Box', 'In Progress', 'Review', and 'Complete'. Day 1 was mainly introduction and discussion. Day 4 ended before the final presentation in the afternoon.](./figures/scrum_board2.jpg){#Figure_4 .Figure width=500px}
+![Scrum board progress during code development. Categories from left to right: 'Ice Box', 'In Progress', 'Review', and 'Complete'. Day 1 was mainly introduction and discussion. Day 2-3 mainly code development. Day 4 was primarily review and pull request merging. Coding ended before the final presentations on day 4 in the afternoon.](./figures/scrum_board.jpg){#Figure_3 .Figure}
 
 ### Package development
 Wat allemaal gedaan tegen einde. Pkgdown website met readme, functies met documentation and examples; repo met code coverage enal
+
+([Fig. 4](#Figure_4))
+
+![Overview of the gcube pkgdown website.](./figures/pkgdown_site.png){#Figure_4 .Figure}
 
 ### Incorporation of virtual species to the simulation workflow
 - incorporation of project 8 and framework for virtualspecies
