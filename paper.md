@@ -124,6 +124,8 @@ The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the m
 It was *a priori* decided by the first author to build the simulation framework using the R programming language as an R package, where participants could collaborate efficiently with each other via GitHub (https://github.com/).
 A repository for this package was prepared under the name 'simcuber' and a code structure was proposed for the framework (see next section).
 
+Common guidelines for software development (e.g. related to coding style, function naming and unit testing) were mentioned to ensure efficient collaboration as well as future maintenance and development [@huybrechts2024guidelines].
+
 ### Code architecture
 General code architecture of the package was proposed following preparation of the hackathon by the first author.
 As indicated in the introduction, the simulation framework and thus the R package can be divided into three different processes related to different variables that depend on *species*, *observation*, *space* and *time*.
@@ -260,22 +262,42 @@ This function is a supporting function for `sample_observations()` to add a `coo
 ### Collaboration and division of tasks
 Following the information provided in the previous subsections, four types of tasks were distinguished ([Fig. 2](#Figure_2)).
 
-1. Lowlevel tasks: 
+1. Low level tasks: Tasks related to supporting and helper functions of the high level functions `simulate_occurrences()` and `sample_observations()`. They were the first priority in the hackathon.
 
-2. Highlevel tasks: 
+|             Task         |                    Description               |      High level relation    |
+|--------------------------|----------------------------------------------|-----------------------------|
+| spatial autocorrelation  | add spatial autocorrelation helper function  | occurrence process function |
+| temporal autocorrelation | add temporal autocorrelation helper function | occurrence process function |
+| detection probability    | implement detection probability              | detection process function  |
+| sampling bias            | add sampling bias helper function            | detection process function  |
+| coordinate uncertainty   | add coordinate uncertainty helper function   | detection process function  |
+
+2. High level tasks: 
+
+|         Task         |                           Description                         |
+|----------------------|---------------------------------------------------------------|
+| simulate occurrences | combine helper functions in `simulate_occurrences()` function |
+| sample observations  | combine helper functions in `sample_observations()` function  |
 
 3. Technical tasks: 
 
+|         Task         |                           Description                         |
+|----------------------|---------------------------------------------------------------|
+| simulate occurrences | combine helper functions in `simulate_occurrences()` function |
+| sample observations  | combine helper functions in `sample_observations()` function  |
+
 4. Creative tasks: 
+
+|         Task         |                           Description                         |
+|----------------------|---------------------------------------------------------------|
+| simulate occurrences | combine helper functions in `simulate_occurrences()` function |
+| sample observations  | combine helper functions in `sample_observations()` function  |
 
 ![Visualisation of the different types of tasks. See text for explanation.](./figures/task_types.png){#Figure_2 .Figure}
 
 Using a Google Form we got an overview of participants' interest in the different tasks, and an idea where potential problems might arise. Tasks were chosen ... *bespreek icebox silicon valley*
 
-Finally, common guidelines for software development (e.g. related to coding style, function naming and unit testing) were mentioned to ensure efficient collaboration as well as future maintenance and development.
 
-deze citatie:
-Huybrechts P, Trekels M, Abraham L, Desmet P (2024). B-Cubed software development guide. https://docs.b-cubed.eu/dev-guide/
 
 ## Results
 Wat allemaal gedaan tegen einde. Pkgdown website met readme, functies met documentation and examples; repo met code coverage enal
