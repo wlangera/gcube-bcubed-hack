@@ -334,9 +334,24 @@ sample_observations(
 ```
 
 ### Incorporation of virtual species to the simulation workflow
-- incorporation of project 8 and framework for virtualspecies
+Project 8 originally aimed to address the challenges of incomplete and unreliable biodiversity data which hinder accurate species distribution models (SDMs). By creating virtual species with known ecological characteristics, researchers can simulate and analyse the effects of spatial, temporal, and taxonomic uncertainties. This "virtual ecologist" approach helps quantify sources of error and refine modelling techniques. The ultimate goal is to improve conservation planning, especially for rare or endangered species, by providing more reliable predictions of species distributions under various environmental conditions, including climate change.
 
-- samengevat op meeting achteraf met mensen die ermee bezig waren
+At an early stage of the hackathon, it was determined that the concepts and ideas developed by this group would be integrated into the cube simulation package of group 2. This decision was influenced by the existing proposal to incorporate a virtual species workflow using the **virtualspecies** package, as mentioned above. The focus was primarily on discussions, conceptualization, and experimentation with the code of both the **virtualspecies** package and the **gcube** package as it was being developed at the time.
+
+The idea of working with a virtual species species approach in **gcube** is that simulations can start from two points.
+
+1. Original **gcube** workflow: Start from empty polygon and mathematical concepts.
+2. **virtualspecies** workflow: Start from environmental data layers.
+
+We identified the needs for future development of the virtual species species approach. Link functions are required that accept output from the **virtualspecies** package and provide input for the three main simulation functions of **gcube**.
+
+| Output from **virtualspecies** | Link function **gcube** (to be developed) | Input for **gcube** function |
+|--------------------------------|-------------------------------------------|------------------------------|
+| create environmental suitability map (from `generateSpFromFun()` or `generateSpFromPCA()`) | `rescale_suitability_raster()`?  | `simulate_occurrences()` |
+| presence-absence map (from `convertToPA()`) | `occurrences_from_raster()`? | `sample_observations()` |
+| sampled presence points (from `sampleOccurrences()`) | `virtual_occurrences_to_sf()` | `add_coordinate_uncertainty()` and/or `grid_designation()` |
+
+This is currently not implemented in the package.
 
 ## gcube workflow example
 This is a basic example from the README which shows the workflow for simulating a biodiversity data cube using the **gcube** package. This is not the exact README example from the hackathon, but a cleaned version from the week after. It uses the exact code as developed during the hackathon, but at that time we did not have enough time to create a clean README example.
