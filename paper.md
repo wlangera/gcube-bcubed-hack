@@ -122,7 +122,7 @@ The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the m
 ## Materials and Methods
 ### Technical setup
 It was *a priori* decided by the first author to build the simulation framework using the R programming language as an R package [@R2024lang], where participants could collaborate efficiently with each other via GitHub (https://github.com/).
-A repository for this package was prepared under the name 'simcuber' and a code structure was proposed for the framework (see next section).
+A repository for this package was prepared under the name 'simcuber' and a code structure was proposed for the framework (see next subsection).
 
 Common guidelines for software development (e.g. related to coding style, function naming and unit testing) were mentioned to ensure efficient collaboration as well as future maintenance and development [@huybrechts2024guidelines].
 
@@ -146,9 +146,11 @@ For grid designation, R code was already available as the function `grid_designa
 
 The three processes can be described in three main functions respectively `simulate_occurrences()`, `sample_observations()` and `grid_designation()`. These can depend on multiple supporting functions for example per variable mentioned above or for specific subprocesses (e.g. temporal autocorrelation).
 
-Some (pseudo)code and ideas for implementation were provided by the first author for `simulate_occurrences()` and `sample_observations()`:
+Some (pseudo)code and ideas for implementation were provided by the first author for `simulate_occurrences()` and `sample_observations()` on the first day.
 
-``` {#Code_1 .r .Code}
+**1. Occurrence process**
+
+``` r
 simulate_occurrences(
   polygon,
   initial_average_abundance = 50,
@@ -188,7 +190,9 @@ A numeric value between indicating the strength of spatiotemporal autocorrelatio
 
 A positive numeric value. The seed for random number generation to make results reproducible. If `NA` (the default), no seed is used.
 
-``` {#Code_2 .r .Code}
+**2. Detection process**
+
+``` r
 sample_observations(
   occurrences,
   detection_probability = 1,
@@ -235,7 +239,7 @@ A positive numeric value. The seed for random number generation to make results 
 
 Finally, we also have the function `add_coordinate_uncertainty()`.
 
-``` {#Code_3 .r .Code}   
+``` r   
 add_coordinate_uncertainty(
   occurrences,
   coordinate_uncertainty_meters = 25
@@ -287,12 +291,12 @@ Following the information provided in the previous subsections, four types of ta
 
 4. **Creative tasks**: Random tasks that require out of the box or creative thinking and which are (mainly) independent from other tasks. Participants were encouraged to come up with interesting applications and links to other frameworks/concepts/software/... These tasks could be done throughout the development process of the hackathon.
 
-|              Task              |                               Description                                 |
-|--------------------------------|---------------------------------------------------------------------------|
-| spatiotemporal autocorrelation | add spatiotemporal autocorrelation helper function                        |
-| virtualspecies                 | create functions to link to **virtualspecies** [@leroy2016virtualspecies] |
-| vignettes                      | create vignettes                                                          |
-| ...                            | ...                                                                       |
+|              Task              |                               Description                     |
+|--------------------------------|---------------------------------------------------------------|
+| spatiotemporal autocorrelation | add spatiotemporal autocorrelation helper function            |
+| virtualspecies                 | link to **virtualspecies** package [@leroy2016virtualspecies] |
+| vignettes                      | create vignettes                                              |
+| ...                            | ...                                                           |
 
 ![Schematic overview of the different types of tasks. See text for explanation.](./figures/task_types.png){#Figure_2 .Figure width=500px}
 
@@ -307,9 +311,19 @@ Taks were efficiently distributed along the participants ([Fig. 3](#Figure_3)). 
 ![Overview of the gcube pkgdown website.](./figures/pkgdown_site.png){#Figure_4 .Figure}
 
 ### Package development
-The package was renamed to **gcube** which stands for ‘generate cube’ since it can be used to generate biodiversity data cubes from minimal input. 
+The package was renamed to **gcube** which stands for ‘generate cube’ since it can be used to generate biodiversity data cubes from minimal input.
 
-``` {#Code_4 .r .Code}
+The biodiversity data cube simulation workflow of **gcube** is divided in three steps or processes:
+
+1.  Occurrence process
+2.  Detection process
+3.  Grid designation process
+
+The three processes can be executed by three main functions `simulate_occurrences()`, `sample_observations()` and `grid_designation()`, respectively. An example workflow is given in the next section. Here we give a more technical explanation. All these functions have a `seed` argument. This is the seed for random number generation to make results reproducible. If `NA` (the default), no seed is used.
+
+**1. Occurrence process**
+
+``` r
 simulate_occurrences(
   plgn,
   initial_average_abundance = 50,
@@ -321,7 +335,9 @@ simulate_occurrences(
 )
 ```
 
-``` {#Code_5 .r .Code}
+**2. Detection process**
+
+``` r
 sample_observations(
   occurrences,
   detection_probability = 1,
@@ -332,6 +348,24 @@ sample_observations(
   seed = NA
 )
 ```
+
+**3. Grid designation process**
+
+This function was already developed by the first author before the hackathon, but is given here for the sake of completeness.
+
+``` r
+grid_designation(
+  observations,
+  grid,
+  id_col = "row_names",
+  seed = NA,
+  aggregate = TRUE,
+  randomisation = c("uniform", "normal"),
+  p_norm = ifelse(tolower(randomisation[1]) == "uniform", NA, 0.95)
+)
+```
+
+This function designates observations (`observations`) to cells of a given grid (`grid`) to create a data cube. `id_col` specifies the column name of the column with unique ids for each grid cell. If `id_col = "row_names"` (the default), a new column `id` is created were the row names represent the unique ids. If `aggregate = TRUE` (default), return data cube in aggregated form (grid with number of observations per grid cell). Otherwise, return sampled points in uncertainty circle. #' @param randomisation `"uniform"` or `"normal"`. Randomisation method, specified with `randomisation`, is used for sampling within uncertainty circle around each observation. By default `"uniform"` which means each point uncertainty circle has an equal probability to be selected. The other option is `"normal"` where a point is sampled from a bivariate Normal distribution with means equal to the observation point and the variance equal to (-`coordinateUncertaintyInMeters`^2) / (2 * log(1 - `p_norm`)) such that `p_norm` % of all possible samples from this Normal distribution fall within the uncertainty circle. `p_norm` is only used if `randomisation = "normal"` and has the default value of 0.95.
 
 ### Incorporation of virtual species to the simulation workflow
 Project 8 originally aimed to address the challenges of incomplete and unreliable biodiversity data which hinder accurate species distribution models (SDMs). By creating virtual species with known ecological characteristics, researchers can simulate and analyse the effects of spatial, temporal, and taxonomic uncertainties. This "virtual ecologist" approach helps quantify sources of error and refine modelling techniques. The ultimate goal is to improve conservation planning, especially for rare or endangered species, by providing more reliable predictions of species distributions under various environmental conditions, including climate change.
@@ -351,16 +385,10 @@ We identified the needs for future development of the virtual species species ap
 | `convertToPA()` | presence-absence map | `occurrences_from_raster()`? | `sample_observations()` |
 | `sampleOccurrences()` | sampled presence points | `virtual_occurrences_to_sf()`? | `add_coordinate_uncertainty()` and/or `grid_designation()` |
 
-This is currently not implemented in the package.
+This was mainly conceptual and not implemented in the package yet.
 
 ## gcube workflow example
 This is a basic example from the README which shows the workflow for simulating a biodiversity data cube using the **gcube** package. This is not the exact README example from the hackathon, but a cleaned version from the week after. It uses the exact code as developed during the hackathon, but at that time we did not have enough time to create a clean README example.
-
-The workflow is divided in three steps or processes:
-
-1.  Occurrence process
-2.  Detection process
-3.  Grid designation process
 
 The functions are set up such that a single polygon as input is enough
 to go through this workflow using default arguments. The user can change
