@@ -262,7 +262,7 @@ This function is a supporting function for `sample_observations()` to add a `coo
 ### Collaboration and division of tasks
 Following the information provided in the previous subsections, four types of tasks were distinguished ([Fig. 2](#Figure_2)).
 
-1. Low level tasks: Tasks related to supporting and helper functions of the high level functions `simulate_occurrences()` and `sample_observations()`. They were the first priority in the hackathon.
+1. Low level tasks: Tasks related to supporting and helper functions of the high level functions `simulate_occurrences()` and `sample_observations()`. They were the first priority of the development process during the hackathon.
 
 |             Task         |                    Description               |      High level relation    |
 |--------------------------|----------------------------------------------|-----------------------------|
@@ -272,32 +272,34 @@ Following the information provided in the previous subsections, four types of ta
 | sampling bias            | add sampling bias helper function            | detection process function  |
 | coordinate uncertainty   | add coordinate uncertainty helper function   | detection process function  |
 
-2. High level tasks: 
+2. High level tasks: These tasks combine the low level functions into the main, high level functions `simulate_occurrences()` and `sample_observations()`. They were the final priority of the development process during the hackathon.
 
-|         Task         |                           Description                         |
-|----------------------|---------------------------------------------------------------|
-| simulate occurrences | combine helper functions in `simulate_occurrences()` function |
-| sample observations  | combine helper functions in `sample_observations()` function  |
+|         Task         |                                 Description                                  |
+|----------------------|------------------------------------------------------------------------------|
+| simulate occurrences | combine supporting and helper functions in `simulate_occurrences()` function |
+| sample observations  | combine supporting and helper functions in `sample_observations()` function  |
 
-3. Technical tasks: 
+3. Technical tasks: These tasks encompass general code development and testing. They were required throughout the development process of the hackathon.
 
-|         Task         |                           Description                         |
-|----------------------|---------------------------------------------------------------|
-| simulate occurrences | combine helper functions in `simulate_occurrences()` function |
-| sample observations  | combine helper functions in `sample_observations()` function  |
+|        Task       |                 Description                    |
+|-------------------|------------------------------------------------|
+| unit tests        | create unit tests and calculate code coverage  |
+| documentation     | maintain function and package documentation    |
+| pkgdown website   | maintain pkgdown website [@pkgdown2024wickham] |
+| GitHub repository | maintain GitHub repository                     |
 
-4. Creative tasks: 
+4. Creative tasks: Random tasks that require out of the box or creative thinking and which are (mainly) independent from other tasks. Participants were encouraged to come up with interesting applications and links to other frameworks/concepts/software/... These tasks could be done throughout the development process of the hackathon.
 
-|         Task         |                           Description                         |
-|----------------------|---------------------------------------------------------------|
-| simulate occurrences | combine helper functions in `simulate_occurrences()` function |
-| sample observations  | combine helper functions in `sample_observations()` function  |
+|              Task              |                     Description                    |
+|--------------------------------|----------------------------------------------------|
+| spatiotemporal autocorrelation | add spatiotemporal autocorrelation helper function |
+| virtualspecies                 | create functions to link to **virtualspecies**     |
+| vignettes                      | create vignettes                                   |
+| ...                            | ...                                                |
 
 ![Visualisation of the different types of tasks. See text for explanation.](./figures/task_types.png){#Figure_2 .Figure}
 
-Using a Google Form we got an overview of participants' interest in the different tasks, and an idea where potential problems might arise. Tasks were chosen ... *bespreek icebox silicon valley*
-
-
+Using a Google Form we got an overview of participants' interest in the different tasks, and an idea where a potential lack of coverage might arise. Tasks were divided and followed up via a simple scrum methodology by using sticky notes (coloured by task type) on a board. The board was divided in four parts (from left to right): 'Ice Box', 'In Progress', 'Review', and 'Complete'. The 'Ice Box' is where all the potential tasks and ideas were stored before they were prioritized and selected for development. The 'In Progress' category contains tasks that the team was actively working on during development. The 'Review' category is for tasks that have been completed but are awaiting review, testing, or approval. The 'Complete' category includes tasks that have been reviewed, approved, and finalized. Participants were free to choose and add tasks to the scrum board, indicating the task and their name on the sticky note.
 
 ## Results
 Wat allemaal gedaan tegen einde. Pkgdown website met readme, functies met documentation and examples; repo met code coverage enal
