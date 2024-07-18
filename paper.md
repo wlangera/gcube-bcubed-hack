@@ -124,8 +124,8 @@ The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the m
 It was *a priori* decided by the first author to build the simulation framework using the R programming language as an R package, where participants could collaborate efficiently with each other via GitHub (https://github.com/).
 A repository for this package was prepared under the name 'simcuber' and a code structure was proposed for the framework (see next section).
 
-### Coding structure
-General coding structure of the package was proposed following preparation of the hackathon by the first author.
+### Code architecture
+General code architecture of the package was proposed following preparation of the hackathon by the first author.
 As indicated in the introduction, the simulation framework and thus the R package can be divided into three different processes related to different variables that depend on *species*, *observation*, *space* and *time*.
 
 1. occurrence process
@@ -256,8 +256,6 @@ This function is a supporting function for `sample_observations()` to add a `coo
 4.  Convert to sf object with POINT geometry
     -   `sf::st_as_sf()`
     -   create helper function `virtualspecies_to_sf()`?
-
-
 
 ### Collaboration and division of tasks
 Following the information provided in the previous subsections, four types of tasks were distinguished ([Fig. 2](#Figure_2)).
