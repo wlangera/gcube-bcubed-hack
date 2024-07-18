@@ -319,9 +319,11 @@ The biodiversity data cube simulation workflow of **gcube** is divided in three 
 2.  Detection process
 3.  Grid designation process
 
-The three processes can be executed by three main functions `simulate_occurrences()`, `sample_observations()` and `grid_designation()`, respectively. An example workflow is given in the next section. Here we give a more technical explanation. All these functions have a `seed` argument. This is the seed for random number generation to make results reproducible. If `NA` (the default), no seed is used.
+The three processes can be executed by three main functions `simulate_occurrences()`, `sample_observations()` and `grid_designation()`, respectively. The functions are set up such that a single polygon as input is enough to go through this workflow using default arguments. An example workflow is given in the next section. In this subsection, we give a more technical overview of the functions that were developed. The three functions all have a `seed` argument used to make results reproducible. If `NA` (the default), no seed is used.
 
 **1. Occurrence process**
+
+The `simulate_occurrences()` function generates occurrences of a species within a given spatial and/or temporal extend.
 
 ``` r
 simulate_occurrences(
@@ -334,6 +336,46 @@ simulate_occurrences(
   seed = NA
 )
 ```
+
+The input (`plgn`) should be an sf object with POLYGON geometry indicating the spatial extend to simulate occurrences.
+
+The temporal component of this function is executed by the `simulate_timeseries()` supporting function.
+
+``` r
+simulate_timeseries(
+  initial_average_occurrences = 50,
+  n_time_points = 1,
+  temporal_function = NA,
+  ...,
+  seed = NA
+)
+```
+
+The initial number of observations (`initial_average_abundance`) and temporal trend function (`temporal_function`) generate a number of occurrences for each time point (total number of time points is given by `n_time_points`). If the temporal function is `NA` (default), it will sample `n_time_points` times from a Poisson distribution with average equal to `initial_average_occurrences`. You can also specify a function which generates a trend in number of occurrences over time. This can be the internal function `simulate_random_walk()` or a custom function that takes `initial_average_occurrences` and `n_time_points` as arguments. Additional arguments for the temporal function can be passed to the ellipsis argument (`...`). The specified temporal function will calculate a number of occurrences for each time point according to a certain function (e.g. a random walk in case of `temporal_function = simulate_random_walk`) and draw this from a Poisson distribution
+
+The spatial component of `simulate_occurrences()` is executed by the `create_spatial_pattern()` and `sample_occurrences_from_raster()` supporting functions. 
+
+``` r
+create_spatial_pattern(
+  polygon,
+  resolution, # Currently hard coded, argument cannot be used
+  spatial_pattern = c("random", "clustered"),
+  seed = NA,
+  n_sim = 1
+)
+```
+
+`create_spatial_pattern()` creates a raster with a spatial pattern for the area of a polygon (`polygon`) according to a spatial patter `spatial_pattern`. `"random"` is the default pattern. The user is able to provide a numeric value >= 1 (1 is "random" and 10 is "clustered"). A larger number means a broader size of the clusters. This number changes the range parameter of the spherical variogram model. `spatial_pattern = 1` means the range has the same size of the grid cell, which is defined in resolution argument (currently hard coded). We use the function `gstat::vgm()` to implement the spherical variogram model [@gstat2016Graler].
+
+``` r
+sample_occurrences_from_raster(
+  rs,
+  ts,
+  seed = NA
+)
+```
+
+The raster output of `create_spatial_pattern()` is then used as input for `sample_occurrences_from_raster()` (`rs`). From this raster, it samples a number of occurrences (`ts`) as provided by `simulate_timeseries()` for each time point. The final result is thus a number of occurrences sampled from a spatial pattern for multiple time points which is passed as output for `simulate_occurrences()`.
 
 **2. Detection process**
 
@@ -351,7 +393,7 @@ sample_observations(
 
 **3. Grid designation process**
 
-This function was already developed by the first author before the hackathon, but is given here for the sake of completeness.
+This function was already developed by the first author before the hackathon started, but is given here for the sake of completeness.
 
 ``` r
 grid_designation(
