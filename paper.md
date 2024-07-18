@@ -345,11 +345,11 @@ The idea of working with a virtual species species approach in **gcube** is that
 
 We identified the needs for future development of the virtual species species approach. Link functions are required that accept output from the **virtualspecies** package and provide input for the three main simulation functions of **gcube**.
 
-| Output from **virtualspecies** | Link function **gcube** (to be developed) | Input for **gcube** function |
+**virtualspecies** function(s) | **virtualspecies** output | Link function **gcube** | **gcube** function(s) |
 |--------------------------------|-------------------------------------------|------------------------------|
-| create environmental suitability map (from `generateSpFromFun()` or `generateSpFromPCA()`) | `rescale_suitability_raster()`?  | `simulate_occurrences()` |
-| presence-absence map (from `convertToPA()`) | `occurrences_from_raster()`? | `sample_observations()` |
-| sampled presence points (from `sampleOccurrences()`) | `virtual_occurrences_to_sf()` | `add_coordinate_uncertainty()` and/or `grid_designation()` |
+| `generateSpFromFun()` or `generateSpFromPCA()` | environmental suitability map | `rescale_suitability_raster()`?  | `simulate_occurrences()` |
+| `convertToPA()` | presence-absence map | `occurrences_from_raster()`? | `sample_observations()` |
+| `sampleOccurrences()` | sampled presence points | `virtual_occurrences_to_sf()`? | `add_coordinate_uncertainty()` and/or `grid_designation()` |
 
 This is currently not implemented in the package.
 
