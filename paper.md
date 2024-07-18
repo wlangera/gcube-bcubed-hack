@@ -114,7 +114,7 @@ During the B-Cubed Hackathon (Hacking Biodiversity Data Cubes for Policy), we ai
 
 The simulation framework can be used to assess multiple research questions under different parameter settings, such as the effect of clustering on occurrence-to-grid designation and the effect of different patterns of missingness on data quality and indicator robustness. Simulation studies can incorporate scenarios with missing data, enabling researchers to assess the impact of data gaps on analyses. Understanding how missing data influences results is crucial for improving data collection strategies and addressing potential biases. With this, the secondary objective of the simulation study is to develop a visualisation tool for the simulated cubes. This tool aims to enhance the understanding of data clustering and missingness within the simulated environment. By creating a visual representation, researchers can effectively analyse and interpret patterns of clustered data as well as identify areas where data is missing. This visualization capability contributes to a more comprehensive exploration of the simulated scenarios, allowing for deeper insights into the behaviour of data within the context of the study.
 
-The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the methods and results of projects 2+8 during this hackathon unless mentioned otherwise.
+The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the methods and results of projects 2+8 during this hackathon unless mentioned otherwise. The final commit hash of the GitHub repo is given at the end of this paper. Some function and argument names might be slighty different in this paper, because they were changed shortly after the hackathon and are used here as such to improve clarity.
 
 ![Simulation framework for biodiversity data cubes. An example of three species that differ in rarity, clustering and detection probability/sampling effort.](./figures/visual_proposal.png){#Figure_1
 .Figure}
@@ -653,26 +653,29 @@ ggplot() +
 
 ## Conclusions and future work
 
-- vignettes
+- summarise take away message
 
-- multispecies
-
-- implement virtual species
-
-- unit tests for all functions
-
-- documentation complete
-
-- issues: eg bugs: crs, improvements: column names, enhancements: spatial pattern, spatiotemporal connection
+- to do after the hackathon
+  - vignettes
+  
+  - multispecies
+  
+  - implement virtual species
+  
+  - unit tests for all functions
+  
+  - documentation complete
+  
+  - issues: eg bugs: crs, improvements: column names, enhancements: spatial pattern, spatiotemporal connection
 
 ## Links to software
 - gcube repo
 
-- Commit hash meegeven van einde hackathon: reference point to know what version of the software you reviewed.
+- Commit hash meegeven van einde hackathon: reference point
 https://github.com/b-cubed-eu/gcube/commit/6cceb2b229ac25d1df47a9c3a2e20b464f827e18
-if function names or arguments are different, it is because it was changed shortly after the hackathon and is used here as such to improve clarity
+if function names or arguments are differentin this paper, it is because it was changed shortly after the hackathon and is used here as such to improve clarity
 
-- current pkgdown website and say that during writing this there is a version 0.1.0 with vignettes etc.
+- current pkgdown website and say that at the time of writing this, there is a version 0.1.0 with vignettes etc.
 
 
 ## Acknowledgements
