@@ -211,10 +211,7 @@ A numeric value between 0 and 1, corresponding to the probability of detection o
 
 - **sampling_bias**:
 
-`"no_bias"`, `"polygon"` or `"manual"`. The method used to generate a sampling bias (cf. the **virtualspecies** package @leroy2016virtualspecies).
-
-  - `"polygon"`: bias the sampling in a polygon. Provide your polygon to `bias_area`. Provide bias strength to `bias_strength`.
-  - `"manual"`: bias the sampling manually via a raster. Provide your raster layer in which each cell contains the probability to be sampled to `bias_weights`.
+`"no_bias"`, `"polygon"` or `"manual"`. The method used to generate a sampling bias (cf. the **virtualspecies** package @leroy2016virtualspecies). `"polygon"`: bias the sampling in a polygon. Provide your polygon to `bias_area`. Provide bias strength to `bias_strength`. `"manual"`: bias the sampling manually via a raster. Provide your raster layer in which each cell contains the probability to be sampled to `bias_weights`.
 
 - **bias_area**:
 
@@ -262,7 +259,7 @@ This function is a supporting function for `sample_observations()` to add a `coo
 ### Collaboration and division of tasks
 Following the information provided in the previous subsections, four types of tasks were distinguished ([Fig. 2](#Figure_2)).
 
-**1. Low level tasks**: Tasks related to supporting and helper functions of the high level functions `simulate_occurrences()` and `sample_observations()`. They were the first priority of the development process during the hackathon.
+1. **Low level tasks**: Tasks related to supporting and helper functions of the high level functions `simulate_occurrences()` and `sample_observations()`. They were the first priority of the development process during the hackathon.
 
 |             Task         |                    Description               |      High level relation    |
 |--------------------------|----------------------------------------------|-----------------------------|
@@ -272,14 +269,14 @@ Following the information provided in the previous subsections, four types of ta
 | sampling bias            | add sampling bias helper function            | detection process function  |
 | coordinate uncertainty   | add coordinate uncertainty helper function   | detection process function  |
 
-**2. High level tasks**: These tasks combine the low level functions into the main, high level functions `simulate_occurrences()` and `sample_observations()`. They were the final priority of the development process during the hackathon.
+2. **High level tasks**: These tasks combine the low level functions into the main, high level functions `simulate_occurrences()` and `sample_observations()`. They were the final priority of the development process during the hackathon.
 
 |         Task         |                                 Description                                  |
 |----------------------|------------------------------------------------------------------------------|
 | simulate occurrences | combine supporting and helper functions in `simulate_occurrences()` function |
 | sample observations  | combine supporting and helper functions in `sample_observations()` function  |
 
-**3. Technical tasks**: These tasks encompass general code development and testing. They were required throughout the development process of the hackathon.
+3. **Technical tasks**: These tasks encompass general code development and testing. They were required throughout the development process of the hackathon.
 
 |        Task       |                 Description                    |
 |-------------------|------------------------------------------------|
@@ -288,7 +285,7 @@ Following the information provided in the previous subsections, four types of ta
 | pkgdown website   | maintain pkgdown website [@pkgdown2024wickham] |
 | GitHub repository | maintain GitHub repository                     |
 
-**4. Creative tasks**: Random tasks that require out of the box or creative thinking and which are (mainly) independent from other tasks. Participants were encouraged to come up with interesting applications and links to other frameworks/concepts/software/... These tasks could be done throughout the development process of the hackathon.
+4. **Creative tasks**: Random tasks that require out of the box or creative thinking and which are (mainly) independent from other tasks. Participants were encouraged to come up with interesting applications and links to other frameworks/concepts/software/... These tasks could be done throughout the development process of the hackathon.
 
 |              Task              |                               Description                                 |
 |--------------------------------|---------------------------------------------------------------------------|
