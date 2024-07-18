@@ -300,20 +300,227 @@ Using a Google Form we got an overview of participants' interest in the differen
 
 ## Results
 ### Collaboration
-Taks were efficiently distributed along the participants ([Fig. 3](#Figure_3)). In total, we collaborated with fourteen people pushing 209 commits to the main branch and 300 commits to all branches. On main, 56 files were changed and there have been 2,856 additions and 373 deletions. By the end of the hackathon, all CMD checks passed and we had a code coverage of 67%.
+Taks were efficiently distributed along the participants ([Fig. 3](#Figure_3)). In total, we collaborated with fourteen people pushing 209 commits to the main branch and 300 commits to all branches. On main, 56 files were changed and there have been 2,856 additions and 373 deletions. By the end of the hackathon, we had a functional pkgdown website ([Fig. 4](#Figure_4)), all CMD checks passed and we had a code coverage of 67%.
 
 ![Scrum board progress during code development. Categories from left to right: 'Ice Box', 'In Progress', 'Review', and 'Complete'. Day 1 was mainly introduction and discussion. Day 2-3 mainly code development. Day 4 was primarily review and pull request merging. Coding ended before the final presentations on day 4 in the afternoon.](./figures/scrum_board.jpg){#Figure_3 .Figure}
 
-### Package development
-Wat allemaal gedaan tegen einde. Pkgdown website met readme, functies met documentation and examples; repo met code coverage enal
-
-([Fig. 4](#Figure_4))
-
 ![Overview of the gcube pkgdown website.](./figures/pkgdown_site.png){#Figure_4 .Figure}
+
+### Package development
+The package was renamed to **gcube** which stands for ‘generate cube’ since it can be used to generate biodiversity data cubes from minimal input. 
+
+``` {#Code_4 .r .Code}
+simulate_occurrences(
+  plgn,
+  initial_average_abundance = 50,
+  spatial_autocorr = c("random", "clustered"),
+  n_time_points = 1,
+  temporal_function = NA,
+  ...,
+  seed = NA
+)
+```
+
+``` {#Code_5 .r .Code}
+sample_observations(
+  occurrences,
+  detection_probability = 1,
+  sampling_bias = c("no_bias", "polygon", "manual"),
+  bias_area = NA,
+  bias_strength = 1,
+  bias_weights = NA,
+  seed = NA
+)
+```
 
 ### Incorporation of virtual species to the simulation workflow
 - incorporation of project 8 and framework for virtualspecies
+
 - samengevat op meeting achteraf met mensen die ermee bezig waren
+
+## gcube workflow example
+This is a basic example from the README which shows the workflow for simulating a biodiversity data cube using the **gcube** package. This is not the exact README example from the hackathon, but a cleaned version from the week after. It uses the exact code as developed during the hackathon, but at that time we did not have enough time to create a clean README example.
+
+The workflow is divided in three steps or processes:
+
+1.  Occurrence process
+2.  Detection process
+3.  Grid designation process
+
+The functions are set up such that a single polygon as input is enough
+to go through this workflow using default arguments. The user can change
+these arguments to allow for more flexibility.
+
+``` r
+# Load packages
+library(gcube)
+
+library(sf)      # working with spatial objects
+library(dplyr)   # data wrangling
+library(ggplot2) # visualisation with ggplot
+```
+
+We create a random polygon as input.
+
+``` r
+# Create a polygon to simulate occurrences
+polygon <- st_polygon(list(cbind(c(5, 10, 8, 2, 3, 5), c(2, 1, 7,9, 5, 2))))
+
+# Visualise
+ggplot() + 
+  geom_sf(data = polygon) +
+  theme_minimal()
+```
+
+![](./figures/readme-polygon-1.png){width=500px}
+
+**1. Occurrence process**
+
+We generate occurrence points within the polygon using the
+`simulate_occurrences()` function. These are the “real” occurrences of
+the species, whether we have observed them or not. In the
+`simulate_occurrences()` function, the user can specify different levels
+of spatial clustering, and can define the trend change of the species
+over time.
+
+``` r
+# Simulate occurrences within polygon
+occurrences_df <- simulate_occurrences(
+  plgn = polygon,
+  seed = 123)
+#> [using unconditional Gaussian simulation]
+
+# Visualise
+ggplot() + 
+  geom_sf(data = polygon) +
+  geom_sf(data = occurrences_df) +
+  theme_minimal()
+```
+![](./figures/readme-simulate-occurrences-1.png){width=500px}
+
+**2. Detection process**
+
+In this step we define the sampling process, based on the detection
+probability of the species and the sampling bias. This is done using the
+`sample_observations()` function. The default sampling bias is
+`"no_bias"`, but bias can also be inserted using a polygon or a grid.
+
+``` r
+# Detect occurrences
+detections_df_raw <- sample_observations(
+  occurrences = occurrences_df,
+  detection_probability = 0.5,
+  seed = 123)
+
+# Visualise
+ggplot() + 
+  geom_sf(data = polygon) +
+  geom_sf(data = detections_df_raw,
+          aes(colour = sampling_status)) +
+  theme_minimal()
+```
+
+![](./figures/readme-detect-occurrences-1.png){width=500px}
+
+We select the detected occurrences and add an uncertainty to these
+observations. This can be done using the `add_coordinate_uncertainty()`
+function.
+
+``` r
+# Select detected occurrences only
+detections_df <- detections_df_raw %>%
+  dplyr::filter(sampling_status == "detected")
+
+# Add coordinate uncertainty
+set.seed(123)
+coord_uncertainty_vec <- rgamma(nrow(detections_df), shape = 2, rate = 6)
+observations_df <- add_coordinate_uncertainty(
+  observations = detections_df,
+  coords_uncertainty_meters = coord_uncertainty_vec)
+
+# Created and sf object with uncertainty circles to visualise
+buffered_observations <- st_buffer(
+  observations_df,
+  observations_df$coordinateUncertaintyInMeters)
+
+# Visualise
+ggplot() + 
+  geom_sf(data = polygon) +
+  geom_sf(data = buffered_observations,
+          fill = alpha("firebrick", 0.3)) +
+  geom_sf(data = observations_df, colour = "firebrick") +
+  theme_minimal()
+```
+
+![](./figures/readme-uncertainty-occurrences-1.png){width=500px}
+
+**3. Grid designation process**
+
+Finally, observations are designated to a grid to create an occurrence
+cube. We create a grid over the spatial extend using
+`sf::st_make_grid()`.
+
+``` r
+# Define a grid over spatial extend
+grid_df <- st_make_grid(
+    buffered_observations,
+    square = TRUE,
+    cellsize = c(1.2, 1.2)
+  ) %>%
+  st_sf() %>%
+  mutate(intersect = as.vector(st_intersects(geometry, polygon,
+                                             sparse = FALSE))) %>%
+  dplyr::filter(intersect == TRUE) %>%
+  dplyr::select(-"intersect")
+```
+
+To create an occurrence cube, `grid_designation()` will randomly take a
+point within the uncertainty circle around the observations. These
+points can be extracted by setting the argument `aggregate = FALSE`.
+
+``` r
+# Create occurrence cube
+occurrence_cube_df <- grid_designation(
+  observations = observations_df,
+  grid = grid_df,
+  seed = 123)
+
+# Get sampled points within uncertainty circle
+sampled_points <- grid_designation(
+  observations = observations_df,
+  grid = grid_df,
+  aggregate = FALSE,
+  seed = 123)
+
+# Visualise grid designation
+ggplot() +
+  geom_sf(data = occurrence_cube_df, linewidth = 1) +
+  geom_sf_text(data = occurrence_cube_df, aes(label = n)) +
+  geom_sf(data = buffered_observations,
+          fill = alpha("firebrick", 0.3)) +
+  geom_sf(data = sampled_points, colour = "blue") +
+  geom_sf(data = observations_df, colour = "firebrick") +
+  labs(x = "", y = "", fill = "n") +
+  theme_minimal()
+```
+
+![](./figures/readme-grid-designation-1.png){width=500px}
+
+The output gives the number of observations per grid cell and minimal
+coordinate uncertainty per grid cell.
+
+``` r
+# Visualise minimal coordinate uncertainty
+ggplot() +
+  geom_sf(data = occurrence_cube_df, aes(fill = min_coord_uncertainty),
+          alpha = 0.5, linewidth = 1) +
+  geom_sf_text(data = occurrence_cube_df, aes(label = n)) +
+  scale_fill_continuous(type = "viridis") +
+  labs(x = "", y = "") +
+  theme_minimal()
+```
+
+![](./figures/readme-visualise-designation-1.png){width=500px}
 
 ## Discussion
 
@@ -321,9 +528,21 @@ Wat allemaal gedaan tegen einde. Pkgdown website met readme, functies met docume
 ## Conclusions and future work
 
 
+- multispecies
+
+- implement virtual species
+
+- unit tests for all functions
+
+- documentation complete
+
+- issues: eg bugs: crs, improvements: column names, enhancements: spatial pattern, spatiotemporal connection
+
 ## Links to software
 -gcube repo
--Commit meegeven van einde hackathon
+
+-Commit hash meegeven van einde hackathon: reference point to know what version of the software you reviewed.
+https://github.com/b-cubed-eu/gcube/commit/6cceb2b229ac25d1df47a9c3a2e20b464f827e18
 
 
 ## Acknowledgements
