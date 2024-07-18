@@ -666,11 +666,13 @@ ggplot() +
 - issues: eg bugs: crs, improvements: column names, enhancements: spatial pattern, spatiotemporal connection
 
 ## Links to software
--gcube repo
+- gcube repo
 
--Commit hash meegeven van einde hackathon: reference point to know what version of the software you reviewed.
+- Commit hash meegeven van einde hackathon: reference point to know what version of the software you reviewed.
 https://github.com/b-cubed-eu/gcube/commit/6cceb2b229ac25d1df47a9c3a2e20b464f827e18
 if function names or arguments are different, it is because it was changed shortly after the hackathon and is used here as such to improve clarity
+
+- current pkgdown website and say that during writing this there is a version 0.1.0 with vignettes etc.
 
 
 ## Acknowledgements
