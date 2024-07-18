@@ -670,6 +670,7 @@ ggplot() +
 
 -Commit hash meegeven van einde hackathon: reference point to know what version of the software you reviewed.
 https://github.com/b-cubed-eu/gcube/commit/6cceb2b229ac25d1df47a9c3a2e20b464f827e18
+if function names or arguments are different, it is because it was changed shortly after the hackathon and is used here as such to improve clarity
 
 
 ## Acknowledgements
