@@ -451,6 +451,25 @@ grid_designation(
 
 This function designates observations (`observations`) to cells of a given grid (`grid`) to create a data cube. `id_col` specifies the column name of the column with unique ids for each grid cell. If `id_col = "row_names"` (the default), a new column `id` is created where the row names represent the unique ids. If `aggregate = TRUE` (default), return data cube in aggregated form (grid with number of observations per grid cell). Otherwise, return sampled points in uncertainty circle. The randomisation method, specified with `randomisation`, is used for sampling within uncertainty circle around each observation. By default `"uniform"` which means each point uncertainty circle has an equal probability to be selected. If no coordinate uncertainty is present, the function takes the point itself for designation. The other option is `"normal"` where a point is sampled from a bivariate Normal distribution with means equal to the observation point and the variance equal to (-`coordinateUncertaintyInMeters`^2) / (2 * log(1 - `p_norm`)) such that `p_norm` % of all possible samples from this Normal distribution fall within the uncertainty circle. `p_norm` is only used if `randomisation = "normal"` and has the default value of 0.95. Uniform is the standard method to create biodiversity data cubes. The normal randomisation is an experimental feature.
 
+The following imports and suggests were used. Packages listed under 'imports' are essential for the package to function and are automatically loaded when **gcube** is loaded. Packages listed under 'suggests' are not essential for the basic functionality of the package but are useful for certain optional features, examples, or tests. These packages are not automatically loaded when **gcube** is loaded.
+
+|   Type   | Package  |           Source                 |
+|----------|----------|----------------------------------|
+| imports  | cli      | [@cli2024csardi]                 |
+| imports  | dplyr    | [@dplyr2023wickham]              |
+| imports  | gstat    | [@gstat2016Graler]               |
+| imports  | magrittr | [@magrittr2022bache]             |
+| imports  | methods  | [@R2024lang]                     |
+| imports  | mnormt   | [@mnormt2022azzalini]            |
+| imports  | rlang    | [@rlang2024henry]                |
+| imports  | sf       | [@sf2018pebesma; @sf2023pebesma] |
+| imports  | stats    | [@R2024lang]                     |
+| imports  | terra    | [@terra2024hijmans]              |
+| imports  | vegan    | [@vegan2024oskanen]              |
+| imports  | withr    | [@withr2024hester]               |
+| suggests | ggplot2  | [@ggplot2016wickham]             |
+| suggests | testthat | [@testthat2011wickham]           |
+
 ### Incorporation of virtual species to the simulation workflow
 Project 8 originally aimed to address the challenges of incomplete and unreliable biodiversity data which hinder accurate species distribution models (SDMs). By creating virtual species with known ecological characteristics, researchers can simulate and analyse the effects of spatial, temporal, and taxonomic uncertainties. This "virtual ecologist" approach helps quantify sources of error and refine modelling techniques. The goal is to improve conservation planning, especially for rare or endangered species, by providing more reliable predictions of species distributions under various environmental conditions, including climate change.
 
@@ -658,6 +677,8 @@ ggplot() +
 - summarise take away message
 
 - to do after the hackathon
+  - clean-up code
+  
   - vignettes
   
   - multispecies
@@ -668,7 +689,7 @@ ggplot() +
   
   - documentation complete
   
-  - issues: eg bugs: crs, improvements: column names, enhancements: spatial pattern, spatiotemporal connection
+  - issues: e.g. bugs: crs, improvements: column names, enhancements: spatial pattern, spatiotemporal connection
 
 ## Links to software
 - gcube repo
@@ -678,7 +699,6 @@ https://github.com/b-cubed-eu/gcube/commit/6cceb2b229ac25d1df47a9c3a2e20b464f827
 if function names or arguments are differentin this paper, it is because it was changed shortly after the hackathon and is used here as such to improve clarity
 
 - current pkgdown website and say that at the time of writing this, there is a version 0.1.0 with vignettes etc.
-
 
 ## Acknowledgements
 We would like to express our gratitude to the Horizon Europe funded B-Cubed (Biodiversity Building Blocks for policy) project for the organisation of this hackathon.
