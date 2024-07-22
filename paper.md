@@ -467,7 +467,6 @@ The following imports and suggests were used. Packages listed under 'imports' ar
 | imports  | **terra**    | [@terra2024hijmans]              |
 | imports  | **vegan**    | [@vegan2024oskanen]              |
 | imports  | **withr**    | [@withr2024hester]               |
-|----------|--------------|----------------------------------|
 | suggests | **ggplot2**  | [@ggplot2016wickham]             |
 | suggests | **testthat** | [@testthat2011wickham]           |
 
