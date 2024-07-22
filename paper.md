@@ -453,8 +453,8 @@ This function designates observations (`observations`) to cells of a given grid 
 
 The following imports and suggests were used. Packages listed under 'imports' are essential for the package to function and are automatically loaded when **gcube** is loaded. Packages listed under 'suggests' are not essential for the basic functionality of the package but are useful for certain optional features, examples, or tests. These packages are not automatically loaded when **gcube** is loaded.
 
-|   Type   | Package  |           Source                 |
-|----------|----------|----------------------------------|
+|   Type   |   Package    |           Source                 |
+|----------|--------------|----------------------------------|
 | imports  | **cli**      | [@cli2024csardi]                 |
 | imports  | **dplyr**    | [@dplyr2023wickham]              |
 | imports  | **gstat**    | [@gstat2016Graler]               |
