@@ -491,7 +491,7 @@ We identified the needs for future development of the virtual species approach. 
 This was mainly conceptual and not implemented in the package yet.
 
 ## gcube workflow example
-This is a basic example from the README which shows the workflow for simulating a biodiversity data cube using the **gcube** package. This is not the exact README example from the hackathon, but a cleaned version from the week after. It uses the exact code as developed during the hackathon, but at that time we did not have enough time to create a clean README example.
+This is a basic example from the README which shows the workflow for simulating a biodiversity data cube using the **gcube** package. An example for one time point for a single species (the default). This is not the exact README example from the hackathon, but a cleaned version from the week after. It uses the exact code as developed during the hackathon, but at that time we did not have enough time to create a clean README example.
 
 The functions are set up such that a single polygon as input is enough
 to go through this workflow using default arguments. The user can change
