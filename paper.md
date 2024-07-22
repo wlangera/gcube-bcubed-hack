@@ -376,7 +376,7 @@ sample_occurrences_from_raster(
 )
 ```
 
-The raster output of `create_spatial_pattern()` is then used as input for `sample_occurrences_from_raster()` (`rs`). From this raster, it samples a number of occurrences (`ts`) as provided by `simulate_timeseries()` for each time point. The final result is thus a number of occurrences sampled from a spatial pattern for multiple time points which is passed as output for `simulate_occurrences()`.
+The raster output of `create_spatial_pattern()` is then used as input for `sample_occurrences_from_raster()` (`rs`). From this raster, it samples a number of occurrences (`ts`) as provided by `simulate_timeseries()` for each time point using `terra::spatSample()` [@terra2024hijmans]. The final result is thus a number of occurrences sampled from a spatial pattern for multiple time points which is passed as output for `simulate_occurrences()`.
 
 **2. Detection process**
 
@@ -420,7 +420,7 @@ apply_manual_sampling_bias(
 
 The function adds a sampling bias weight column to an sf object with POINT geometry containing the occurrences (`occurrences_sf`). This column contains the sample probability based on bias weights within each cell of a given grid layer (`bias_weight`).
 
-`sample_observations()` combines detection probability and sampling bias weight to a single value `p` as a product and uses this to draw for each occurrence from `stats::rbinom(1, 1, p)` to decide whether an occurrence is observed or not.
+`sample_observations()` combines detection probability and sampling bias weight to a single value `p` as a product and uses this to draw for each occurrence from `stats::rbinom(1, 1, p)` [@R2024lang] to decide whether an occurrence is observed or not.
 
 To mimic real life data collection, we can select observed occurrences and add coordinate uncertainty with the `add_coordinate_uncertainty()` function.
 
