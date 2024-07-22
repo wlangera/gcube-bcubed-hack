@@ -455,20 +455,20 @@ The following imports and suggests were used. Packages listed under 'imports' ar
 
 |   Type   | Package  |           Source                 |
 |----------|----------|----------------------------------|
-| imports  | cli      | [@cli2024csardi]                 |
-| imports  | dplyr    | [@dplyr2023wickham]              |
-| imports  | gstat    | [@gstat2016Graler]               |
-| imports  | magrittr | [@magrittr2022bache]             |
-| imports  | methods  | [@R2024lang]                     |
-| imports  | mnormt   | [@mnormt2022azzalini]            |
-| imports  | rlang    | [@rlang2024henry]                |
-| imports  | sf       | [@sf2018pebesma; @sf2023pebesma] |
-| imports  | stats    | [@R2024lang]                     |
-| imports  | terra    | [@terra2024hijmans]              |
-| imports  | vegan    | [@vegan2024oskanen]              |
-| imports  | withr    | [@withr2024hester]               |
-| suggests | ggplot2  | [@ggplot2016wickham]             |
-| suggests | testthat | [@testthat2011wickham]           |
+| imports  | **cli**      | [@cli2024csardi]                 |
+| imports  | **dplyr**    | [@dplyr2023wickham]              |
+| imports  | **gstat**    | [@gstat2016Graler]               |
+| imports  | **magrittr** | [@magrittr2022bache]             |
+| imports  | **methods**  | [@R2024lang]                     |
+| imports  | **mnormt**   | [@mnormt2022azzalini]            |
+| imports  | **rlang**    | [@rlang2024henry]                |
+| imports  | **sf**       | [@sf2018pebesma; @sf2023pebesma] |
+| imports  | **stats**    | [@R2024lang]                     |
+| imports  | **terra**    | [@terra2024hijmans]              |
+| imports  | **vegan**    | [@vegan2024oskanen]              |
+| imports  | **withr**    | [@withr2024hester]               |
+| suggests | **ggplot2**  | [@ggplot2016wickham]             |
+| suggests | **testthat** | [@testthat2011wickham]           |
 
 ### Incorporation of virtual species to the simulation workflow
 Project 8 originally aimed to address the challenges of incomplete and unreliable biodiversity data which hinder accurate species distribution models (SDMs). By creating virtual species with known ecological characteristics, researchers can simulate and analyse the effects of spatial, temporal, and taxonomic uncertainties. This "virtual ecologist" approach helps quantify sources of error and refine modelling techniques. The goal is to improve conservation planning, especially for rare or endangered species, by providing more reliable predictions of species distributions under various environmental conditions, including climate change.
