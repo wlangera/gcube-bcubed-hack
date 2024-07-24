@@ -113,7 +113,7 @@ During the B-Cubed Hackathon (Hacking Biodiversity Data Cubes for Policy), we ai
 2. The detection process: Simulation of a variety of observation processes can generate actual occurrence datasets. Each species has a different **detection probability**. The detection process will also depend on the **sampling effort** which can be different among spatial and temporal dimensions. We can also assign a spatial uncertainty to each observation.
 3. The grid designation process: Based on their spatial uncertainty, occurrences can be designated to grid cells of a larger grid to form a data cube.
 
-The simulation framework can be used to assess multiple research questions under different parameter settings, such as the effect of clustering on occurrence-to-grid designation and the effect of different patterns of missingness on data quality and indicator robustness. Simulation studies can incorporate scenarios with missing data, enabling researchers to assess the impact of data gaps on analyses. Understanding how missing data influences results is crucial for improving data collection strategies and addressing potential biases. With this, the secondary objective of the simulation study is to develop a visualisation tool for the simulated cubes. This tool aims to enhance the understanding of data clustering and missingness within the simulated environment. By creating a visual representation, researchers can effectively analyse and interpret patterns of clustered data as well as identify areas where data is missing. This visualization capability contributes to a more comprehensive exploration of the simulated scenarios, allowing for deeper insights into the behaviour of data within the context of the study.
+The simulation framework can be used to assess multiple research questions under different parameter settings, such as the effect of clustering on occurrence-to-grid designation and the effect of different patterns of missingness on data quality and indicator robustness. Simulation studies can incorporate scenarios with missing data, enabling researchers to assess the impact of data gaps on analyses. Understanding how missing data influences results is crucial for improving data collection strategies and addressing potential biases. With this, the secondary objective of the simulation study is to develop a visualisation tool for the simulated cubes. This tool aims to enhance the understanding of data clustering and missingness within the simulated environment. By creating a visual representation, researchers can effectively aid to interpret patterns of clustered data as well as identify areas where data is missing. This visualization capability contributes to a more comprehensive exploration of the simulated scenarios, allowing for deeper insights into the behaviour of data within the context of the study.
 
 The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the methods and results of projects 2+8 during this hackathon unless mentioned otherwise. The final commit hash of the GitHub repo is given at the end of this paper. Some function and argument names might be slighty different in this paper, because they were changed shortly after the hackathon and are used here as such to improve clarity.
 
@@ -305,6 +305,22 @@ Using a Google Form we got an overview of participants' interest in the differen
 
 ## Results
 ### Collaboration
+This was the general timing of activities during the hackathon. In total, we had about 6 half days of coding time.
+
+| Day | Part      | Activities                                                                                              |
+|-----|-----------|---------------------------------------------------------------------------------------------------------|
+| 1   | Morning   | General hackathon introduction and presentations.                                                       |
+|     | Afternoon | Create project group. Acquaintance with participants and presentation of the objectives of the project. |
+|     |           |                                                                                                         |
+| 2   | Morning   | Division of tasks and start of code development.                                                        |
+|     | Afternoon | Continued code development.                                                                             |
+|     |           |                                                                                                         |
+| 3   | Morning   | Further code development.                                                                               |
+|     | Afternoon | Continued code development.                                                                             |
+|     |           |                                                                                                         |
+| 4   | Morning   | Code review and pull request merging.                                                                   |
+|     | Afternoon | Final presentations of all hackathon projects.                                                          |
+
 After discussion with the participants, the R package was renamed to **gcube** which stands for ‘generate cube’ since it can be used to generate biodiversity data cubes from minimal input.
 
 Tasks were efficiently distributed along the participants ([Fig. 3](#Figure_3)). In total, we collaborated with fourteen people pushing 209 commits to the main branch and 300 commits to all branches. On main, 56 files were changed and there have been 2,856 additions and 373 deletions. By the end of the hackathon, we had a functional pkgdown website ([Fig. 4](#Figure_4)), all CMD checks passed, and we had a code coverage of 67%.
