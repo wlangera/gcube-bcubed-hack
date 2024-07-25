@@ -336,7 +336,7 @@ The biodiversity data cube simulation workflow of **gcube** is divided in three 
 2.  Detection process
 3.  Grid designation process
 
-The three processes can be executed by three main functions `simulate_occurrences()`, `sample_observations()` and `grid_designation()`, respectively. The functions are designed such that a single polygon as input is enough to go through this workflow using default arguments. An example workflow is given in the next section. In this subsection, we give a more technical overview of the functions that were developed. The three functions all have a `seed` argument used to allow for reproducible results. If `NA` (the default), no seed is used.
+The three processes are executed by three main functions `simulate_occurrences()`, `sample_observations()` and `grid_designation()`, respectively. The functions are designed such that a single polygon as input is enough to go through this workflow using default arguments. An example workflow is given in the next section. In this subsection, we give a more technical overview of the functions that were developed. The three functions all have a `seed` argument used to allow for reproducible results. If `NA` (the default), no seed is used.
 
 **1. Occurrence process**
 
@@ -345,7 +345,7 @@ The `simulate_occurrences()` function generates occurrences of a species within 
 ``` r
 simulate_occurrences(
   plgn,
-  initial_average_abundance = 50,
+  initial_average_occurrences = 50,
   spatial_autocorr = c("random", "clustered"),
   n_time_points = 1,
   temporal_function = NA,
@@ -368,7 +368,7 @@ simulate_timeseries(
 )
 ```
 
-The initial number of observations (`initial_average_abundance`) and temporal trend function (`temporal_function`) generate a number of occurrences for each time point (total number of time points is given by `n_time_points`). If the temporal function is `NA` (default), it will sample `n_time_points` times from a Poisson distribution with average equal to `initial_average_occurrences`. You can also specify a function which generates a trend in number of occurrences over time. This can be the internal function `simulate_random_walk()` or a custom function that takes `initial_average_occurrences` and `n_time_points` as arguments. Additional arguments for the temporal function can be passed to the ellipsis argument (`...`). The specified temporal function will calculate a number of occurrences for each time point according to a certain function (e.g. a random walk in case of `temporal_function = simulate_random_walk`) and draw this from a Poisson distribution
+The initial number of occurrences (`initial_average_occurrences`) and temporal trend function (`temporal_function`) generate a number of occurrences for each time point (total number of time points is given by `n_time_points`). If the temporal function is `NA` (default), it will sample `n_time_points` times from a Poisson distribution with average equal to `initial_average_occurrences`. You can also specify a function which generates a trend in number of occurrences over time. This can be the internal function `simulate_random_walk()` or a custom function that takes `initial_average_occurrences` and `n_time_points` as arguments. Additional arguments for the temporal function can be passed to the ellipsis argument (`...`). The specified temporal function will calculate a number of occurrences for each time point according to a certain function (e.g. a random walk in case of `temporal_function = simulate_random_walk`) and draw this from a Poisson distribution
 
 The spatial component of `simulate_occurrences()` is executed by the `create_spatial_pattern()` and `sample_occurrences_from_raster()` supporting functions. 
 
@@ -396,7 +396,7 @@ The raster output of `create_spatial_pattern()` is then used as input for `sampl
 
 **2. Detection process**
 
-We have our occurrences, but not all occurrences are generally observed. The detection of occurrences depends on the detection probability of a species and the sampling bias (includes both sampling bias and effort). This process can be simulated using the `sample_observations()` function.
+We have our occurrences, but not all occurrences are generally observed. The detection of occurrences depends on the detection probability of a species and the sampling bias (includes both sampling bias and effort). This process is simulated using the `sample_observations()` function.
 
 ``` r
 sample_observations(
@@ -410,9 +410,9 @@ sample_observations(
 )
 ```
 
-Detection probability (`detection_probability`) can be passed as a numeric value between 0 and 1. For sampling bias there are three options that can be specified in `sampling_bias` (cf. @leroy2016virtualspecies).
+Detection probability (`detection_probability`) is be passed as a numeric value between 0 and 1. For sampling bias there are three options specified in `sampling_bias` (cf. @leroy2016virtualspecies).
 
-1. With `"no_bias"`, only the detection probability value will decide whether an occurrence is observed or not. If `detection_probability = 1` and `sampling_bias = c("no_bias")`, all occurrences are detected.
+1. With `"no_bias"`, only the detection probability value will decide whether an occurrence is observed or not. If `detection_probability = 1` and `sampling_bias = "no_bias"`, all occurrences are detected.
 2. With `"polygon"`, bias weights depend on their location inside or outside a given polygon with a certain bias strength. This is accomplished by the supporting function `apply_polygon_sampling_bias()`.
 
 ``` r
@@ -438,7 +438,7 @@ The function adds a sampling bias weight column to an sf object with POINT geome
 
 `sample_observations()` combines detection probability and sampling bias weight to a single value `p` as a product and uses this to draw for each occurrence from `stats::rbinom(1, 1, p)` [@R2024lang] to decide whether an occurrence is observed or not.
 
-To mimic real life data collection, we can select observed occurrences and add coordinate uncertainty with the `add_coordinate_uncertainty()` function.
+To mimic real life data collection, we can select observed occurrences and add coordinate uncertainty with the `add_coordinate_uncertainty()` function. This is optional.
 
 ``` r
 add_coordinate_uncertainty(
@@ -451,7 +451,7 @@ This is done by adding an additional column to the observed occurrences (`observ
 
 **3. Grid designation process**
 
-Now that we have our observations, we can designate them to a grid while taking into account the coordinate uncertainty in meters around the observation. This function was already developed by the first author before the hackathon started, but is given here for the sake of completeness.
+Now that we have our observations, we designate them to a grid while taking into account the coordinate uncertainty in meters around the observation if present. This function was already developed by the first author before the hackathon started, but is given here for the sake of completeness.
 
 ``` r
 grid_designation(
