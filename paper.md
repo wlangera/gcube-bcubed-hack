@@ -375,14 +375,14 @@ The spatial component of `simulate_occurrences()` is executed by the `create_spa
 ``` r
 create_spatial_pattern(
   polygon,
-  resolution, # Currently hard coded, argument cannot be used
+  resolution,
   spatial_pattern = c("random", "clustered"),
   seed = NA,
   n_sim = 1
 )
 ```
 
-`create_spatial_pattern()` creates a raster with a spatial pattern for the area of a polygon (`polygon`) according to a spatial patter `spatial_pattern`. `"random"` is the default pattern. The user is able to provide a numeric value >= 1 (1 is "random" and 10 is "clustered"). A larger number means a broader size of the clusters. This number changes the range parameter of the spherical variogram model. `spatial_pattern = 1` means the range has the same size of the grid cell, which is defined in resolution argument (currently hard coded). We use the function `gstat::vgm()` to implement the spherical variogram model [@gstat2016Graler].
+`create_spatial_pattern()` creates a raster for the area of a polygon (`polygon`) with a resolution (`resolution`) according to a spatial patter `spatial_pattern`. `"random"` is the default pattern. The user is able to provide a numeric value >= 1 (1 is "random" and 10 is "clustered"). A larger number means a broader size of the clusters. This number changes the range parameter of the spherical variogram model. `spatial_pattern = 1` means the range has the same size of the grid cell, which is defined in resolution argument (calculated by `simulate_timeseries()` as one hundredth of the extend of the polygon). We use the function `gstat::vgm()` to implement the spherical variogram model [@gstat2016Graler].
 
 ``` r
 sample_occurrences_from_raster(
