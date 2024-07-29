@@ -71,7 +71,7 @@ affiliations:
    index: 3
  - name: Department of Life Health and Environmental Sciences, University of L’Aquila, Via Vetoio 1, 67100 Coppito, Italy
    index: 4
- - name: Department of Natural Sciences, Bernice Pauahi Bishop Museum, 1525 Bernice St, Honolulu, HI 96817, United States 
+ - name: Biodiversity Knowledge Integration Center, School of Life Sciences, Arizona State University, Tempe, AZ 852281, USA
    index: 5
  - name: Organismal and Evolutionary Biology Research Programme, University of Helsinki, Viikinkaari 1, 00790 Helsinki, Finland
    index: 6
