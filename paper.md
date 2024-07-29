@@ -100,11 +100,11 @@ Simulation, Data cubes, Biodiversity, B-Cubed, Monte-Carlo, R package
 
 ------------------------------------------------------------------------
 
-## Abstract
+# Abstract
 
 ...
 
-## Introduction
+# Introduction
 Simulation studies offer numerous benefits due to their ability to mimic real-world scenarios in controlled and customizable environments. Ecosystems and biodiversity data are very complex and involve a multitude of interacting factors. Simulations allow researchers to model and to understand the effects of the complexity of ecological systems by varying parameters such as spatial and/or temporal clustering, species prevalence, etc.
 
 During the B-Cubed Hackathon (Hacking Biodiversity Data Cubes for Policy), we aimed to create a practical simulation framework for biodiversity data cubes based on Monte Carlo methods (= based on repeated random sampling). This framework is composed of three steps ([Fig. 1](#Figure_1)):
@@ -120,14 +120,14 @@ The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the m
 ![Simulation framework for biodiversity data cubes. An example of three species that differ in rarity, clustering and detection probability/sampling effort.](./figures/visual_proposal.png){#Figure_1
 .Figure}
 
-## Materials and Methods
-### Technical setup
+# Materials and Methods
+## Technical setup
 It was *a priori* decided by the first author to build the simulation framework using the R programming language as an R package [@R2024lang], where participants could collaborate efficiently with each other via GitHub (https://github.com/).
 A repository for this package was prepared under the name 'simcuber' and a code structure was proposed for the framework (see next subsection).
 
 Common guidelines for software development (e.g. related to coding style, function naming and unit testing) were mentioned to ensure efficient collaboration as well as future maintenance and development [@huybrechts2024guidelines].
 
-### Code architecture
+## Code architecture
 General code architecture of the package was proposed following preparation of the hackathon by the first author.
 As indicated in the introduction, the simulation framework and thus the R package can be divided into three consecutive processes related to different variables that depend on *species*, *observation*, *space* and *time*.
 
@@ -261,7 +261,7 @@ This function is a supporting function for `sample_observations()` to add a `coo
     -   `sf::st_as_sf()`
     -   create helper function `virtualspecies_to_sf()`?
 
-### Collaboration and division of tasks
+## Collaboration and division of tasks
 Following the information provided in the previous subsections, four types of tasks were distinguished ([Fig. 2](#Figure_2)).
 
 1. **Low level tasks**: Tasks related to supporting and helper functions of the high level functions `simulate_occurrences()` and `sample_observations()`. They were the first priority of the development process during the hackathon.
@@ -303,8 +303,8 @@ Following the information provided in the previous subsections, four types of ta
 
 Using a Google Form we got an overview of participants' interest in the different tasks, and an idea where a potential shortage of coverage might occur. Tasks were divided and followed up via a simple scrum methodology by using sticky notes (coloured by task type) on a board. The board was divided in four parts (from left to right): 'Ice Box', 'In Progress', 'Review', and 'Complete'. The 'Ice Box' is where all the potential tasks and ideas were stored before they were prioritized and selected for development. The 'In Progress' category contains tasks that the team was actively working on during development. The 'Review' category is for tasks that have been completed but are awaiting review, testing, or approval. The 'Complete' category includes tasks that have been reviewed, approved, and finalized. Participants were free to choose and add tasks to the scrum board, indicating the task and their name on the sticky note.
 
-## Results
-### Collaboration
+# Results
+## Collaboration
 This was the general timing of activities during the hackathon. In total, we had about 6 half days of coding time.
 
 | Day | Part      | Activities                                                                                              |
@@ -329,7 +329,7 @@ Tasks were efficiently distributed along the participants ([Fig. 3](#Figure_3)).
 
 ![Overview of the **gcube** pkgdown website.](./figures/pkgdown_site.png){#Figure_4 .Figure}
 
-### R package development
+## R package development
 The biodiversity data cube simulation workflow of **gcube** is divided in three steps or processes:
 
 1.  Occurrence process
@@ -486,7 +486,7 @@ The following imports and suggests were used. Packages listed under 'imports' ar
 | suggests | **ggplot2**  | [@ggplot2016wickham]             |
 | suggests | **testthat** | [@testthat2011wickham]           |
 
-### Incorporation of virtual species to the simulation workflow
+## Incorporation of virtual species to the simulation workflow
 Project 8 originally aimed to address the challenges of incomplete and unreliable biodiversity data which hinder accurate species distribution models (SDMs). By creating virtual species with known ecological characteristics, researchers can simulate and analyse the effects of spatial, temporal, and taxonomic uncertainties. This "virtual ecologist" approach helps quantify sources of error and refine modelling techniques. The goal is to improve conservation planning, especially for rare or endangered species, by providing more reliable predictions of species distributions under various environmental conditions, including climate change.
 
 At an early stage of the hackathon, it was decided to integrate the concepts and ideas developed by this group would be integrated into the cube simulation package of group 2. This decision was influenced by the existing proposal to incorporate a virtual species workflow using the **virtualspecies** package, as mentioned above. The focus was primarily on discussions, conceptualization, and experimentation with the code of both the **virtualspecies** package and the **gcube** package as it was being developed at the time.
@@ -506,7 +506,7 @@ We identified the needs for future development of the virtual species approach. 
 
 This was mainly conceptual and not implemented in the package yet.
 
-## gcube workflow example
+# gcube workflow example
 This is a basic example from the README which shows the workflow for simulating a biodiversity data cube using the **gcube** package. An example for one time point for a single species (the default). This is not the exact README example from the hackathon, but a cleaned version from the week after. It uses the exact code as developed during the hackathon, but at that time we did not have enough time to create a clean README example.
 
 The functions are designed such that a single polygon as input is enough to go through this workflow using default arguments. The user can change these arguments to allow for more flexibility.
@@ -682,11 +682,11 @@ ggplot() +
 
 ![](./figures/readme-visualise-designation-1.png){width=400px}
 
-## Discussion
+# Discussion
 
 ...
 
-## Conclusions and future work
+# Conclusions and future work
 
 - summarise take away message
 
@@ -705,7 +705,7 @@ ggplot() +
   
   - issues: e.g. bugs: crs, improvements: column names, enhancements: spatial pattern, spatiotemporal connection
 
-## Links to software
+# Links to software
 - gcube repo
 
 - Commit hash meegeven van einde hackathon: reference point
@@ -714,9 +714,9 @@ if function names or arguments are differentin this paper, it is because it was 
 
 - current pkgdown website and say that at the time of writing this, there is a version 0.1.0 with vignettes etc.
 
-## Acknowledgements
+# Acknowledgements
 We would like to express our gratitude to the Horizon Europe funded B-Cubed (Biodiversity Building Blocks for policy) project for the organisation of this hackathon.
 Special thanks go to Laura Abraham of Meise Botanic Garden for her outstanding efforts in coordinating the event.
 Additionally, we acknowledge the Research Foundation - Flanders (FWO) and KU Leuven for the support they gave us in making this event possible.
 
-## References
+# References
