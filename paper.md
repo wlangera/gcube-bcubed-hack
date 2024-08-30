@@ -109,8 +109,8 @@ Simulation studies offer numerous benefits due to their ability to mimic real-wo
 
 During the B-Cubed Hackathon (Hacking Biodiversity Data Cubes for Policy), we aimed to create a practical simulation framework for biodiversity data cubes based on Monte Carlo methods (= based on repeated random sampling). This framework is composed of three steps ([Fig. 1](#Figure_1)):
 
-1. The occurrence process: Simulating occurrences of multiple species distributed in a landscape over a temporal scope. This will depend on the **rarity**, which can differ between species and over time, and their **spatial clustering**, which can differ between species. A challenge for this part is to implement a consistent **spatial and temporal autocorrelation** for simulated species trends.
-2. The detection process: Simulation of a variety of observation processes can generate actual occurrence datasets. Each species has a different **detection probability**. The detection process will also depend on the **sampling effort** which can be different among spatial and temporal dimensions. We can also assign a spatial uncertainty to each observation.
+1. The occurrence process: Simulating occurrences of multiple species distributed in a landscape over a temporal scope. This depends on the **rarity**, which can differ between species and over time, and their **spatial clustering**, which can differ between species. A challenge for this part is to implement a consistent **spatial and temporal autocorrelation** for simulated species trends.
+2. The detection process: Simulation of a variety of observation processes can generate actual occurrence datasets. Each species has a different **detection probability**. The detection process also depends on the **sampling effort** which can be different among spatial and temporal dimensions. We can also assign a spatial uncertainty to each observation.
 3. The grid designation process: Based on their spatial uncertainty, occurrences can be designated to grid cells of a larger grid to form a data cube.
 
 The simulation framework can be used to assess multiple research questions under different parameter settings, such as the effect of clustering on occurrence-to-grid designation and the effect of different patterns of missingness on data quality and indicator robustness. Simulation studies can incorporate scenarios with missing data, enabling researchers to assess the impact of data gaps on analyses. Understanding how missing data influences results is crucial for improving data collection strategies and addressing potential biases. With this, the secondary objective of the simulation study is to develop a visualisation tool for the simulated cubes. This tool aims to enhance the understanding of data clustering and missingness within the simulated environment. By creating a visual representation, researchers can effectively aid to interpret patterns of clustered data as well as identify areas where data is missing. This visualization capability contributes to a more comprehensive exploration of the simulated scenarios, allowing for deeper insights into the behaviour of data within the context of the study.
@@ -169,7 +169,7 @@ An sf object with POLYGON geometry indicating the spatial extend to simulate occ
 
 - **initial_average_abundance**:
 
-A positive integer value indicating the average number of occurrences to be simulated within the extend of `polygon` at time point 1. This value will be used as mean of a Poisson distribution ($\lambda$ parameter).
+A positive integer value indicating the average number of occurrences to be simulated within the extend of `polygon` at time point 1. This value is used as mean of a Poisson distribution ($\lambda$ parameter).
 
 - **spatial_autocorr**:
 
@@ -224,7 +224,7 @@ A numeric value between 0 and 1, corresponding to the probability of detection o
 
 - **bias_strength**:
 
-`NA` or a positive numeric value. Only used if `sampling_bias = "polygon"`. The strength of the bias to be applied in the biased area (as a multiplier). Above 1, area will be oversampled. Below 1, area will be undersampled. For example, a value of 50 will result in 50 times more samples within the `bias_area` than outside. Conversely, a value of 0.5 will result in half less samples within the `bias_area` than outside.
+`NA` or a positive numeric value. Only used if `sampling_bias = "polygon"`. The strength of the bias to be applied in the biased area (as a multiplier). Above 1, area will be oversampled. Below 1, area will be undersampled. For example, a value of 50 results in 50 times more samples within the `bias_area` than outside. Conversely, a value of 0.5 results in half less samples within the `bias_area` than outside.
 
 - **bias_weights**:
 
@@ -368,7 +368,7 @@ simulate_timeseries(
 )
 ```
 
-The initial number of occurrences (`initial_average_occurrences`) and temporal trend function (`temporal_function`) generate a number of occurrences for each time point (total number of time points is given by `n_time_points`). If the temporal function is `NA` (default), it will sample `n_time_points` times from a Poisson distribution with average equal to `initial_average_occurrences`. You can also specify a function which generates a trend in number of occurrences over time. This can be the internal function `simulate_random_walk()` or a custom function that takes `initial_average_occurrences` and `n_time_points` as arguments. Additional arguments for the temporal function can be passed to the ellipsis argument (`...`). The specified temporal function will calculate a number of occurrences for each time point according to a certain function (e.g. a random walk in case of `temporal_function = simulate_random_walk`) and draw this from a Poisson distribution
+The initial number of occurrences (`initial_average_occurrences`) and temporal trend function (`temporal_function`) generate a number of occurrences for each time point (total number of time points is given by `n_time_points`). If the temporal function is `NA` (default), it samples `n_time_points` times from a Poisson distribution with average equal to `initial_average_occurrences`. You can also specify a function which generates a trend in number of occurrences over time. This can be the internal function `simulate_random_walk()` or a custom function that takes `initial_average_occurrences` and `n_time_points` as arguments. Additional arguments for the temporal function can be passed to the ellipsis argument (`...`). The specified temporal function calculates a number of occurrences for each time point according to a certain function (e.g. a random walk in case of `temporal_function = simulate_random_walk`) and draw this from a Poisson distribution
 
 The spatial component of `simulate_occurrences()` is executed by the `create_spatial_pattern()` and `sample_occurrences_from_raster()` supporting functions. 
 
@@ -412,7 +412,7 @@ sample_observations(
 
 Detection probability (`detection_probability`) is be passed as a numeric value between 0 and 1. For sampling bias there are three options specified in `sampling_bias` (cf. @leroy2016virtualspecies).
 
-1. With `"no_bias"`, only the detection probability value will decide whether an occurrence is observed or not. If `detection_probability = 1` and `sampling_bias = "no_bias"`, all occurrences are detected.
+1. With `"no_bias"`, only the detection probability value decides whether an occurrence is observed or not. If `detection_probability = 1` and `sampling_bias = "no_bias"`, all occurrences are detected.
 2. With `"polygon"`, bias weights depend on their location inside or outside a given polygon with a certain bias strength. This is accomplished by the supporting function `apply_polygon_sampling_bias()`.
 
 ``` r
