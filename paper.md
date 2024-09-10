@@ -586,20 +586,10 @@ The methods outlined in this paper proved to be very efficient for hackathon cod
 
 ## Future development
 
-- to do after the hackathon
-  - clean-up code
-  
-  - vignettes
-  
-  - multispecies
-  
-  - implement virtual species
-  
-  - unit tests for all functions
-  
-  - documentation complete
-  
-  - issues: e.g. bugs: crs, improvements: column names, enhancements: spatial pattern, spatiotemporal connection
+After working with many people on a single project, an evident first step is the need for code clean-up and unifying coding style and documentation. Due to time constrains, some documentation needs to be added or corrected and unit tests need to be added where necessary for higher code coverage. It would also be good to add vignettes that demonstrate the usage of the different functions arguments throughout the cube simulation workflow.
+
+Several (smaller) issues were posted on GitHub during the hackathon. These (and newly arising) issues will be monitored and fixed.
+Also, for future development, we will evidently aim to address the shortcommings listed in the subsection above. Other, major enhancements would be to (1) provide an efficient way, i.e. a set of functions, for creating cubes for multiple species at once, and (2) implement the virtual species approach as outlined earlier.
 
 # Links to software
 The **gcube** code repository can be found here: https://github.com/b-cubed-eu/gcube. The pkgdown website here: https://b-cubed-eu.github.io/gcube. The final commit hash of the GitHub repo at the end of the hackathon:
