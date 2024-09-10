@@ -8,10 +8,10 @@ tags:
   - Monte-Carlo
   - R package
 output:
-  pdf_document: default
-  word_document: default
   html_document:
     df_print: paged
+  word_document: default
+  pdf_document: default
   rmarkdown::pdf_document:
     fig_caption: yes        
     includes:  
@@ -50,7 +50,7 @@ authors:
   - name: Matilde Martini
     orcid: 0009-0003-5612-925X
     affiliation: 3
-  - name: Arthur Rodrigues
+  - name: Arthur V. Rodrigues
     orcid: 0000-0003-2656-558X
     affiliation: 6
   - name: Annegreet Veeken
