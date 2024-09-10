@@ -115,7 +115,7 @@ There are R packages available for simulation of ecological communities [e.g. @m
 2. The detection process: Simulation of a variety of observation processes generates actual occurrence datasets. Each species has a different **detection probability**. The detection process also depends on the **sampling effort** which can be different among spatial and temporal dimensions. A spatial uncertainty can be assigned to each observation.
 3. The grid designation process: Based on their spatial uncertainty, occurrences are designated to grid cells of a larger grid to form a data cube.
 
-This simulation framework can be used to assess multiple research questions under different parameter settings, such as the effect of spatial clustering on occurrence-to-grid designation and the effect of different patterns of missingness on data quality and robustness of derived indicators. Simulation studies can incorporate scenarios with missing data, enabling researchers to assess the impact of data gaps on analyses within the occurrence cube framework. Furthermore, the development of a visualisation tool for the simulated cubes can enhance the understanding of data clustering and missingness within the simulated environment. By creating a visual representation, researchers can effectively aid to interpret patterns of clustered data as well as identify areas where data is missing. This visualization capability contributes to a more comprehensive exploration of the simulated scenarios, allowing for deeper insights into the behaviour of data within the context of the study.
+This simulation framework can be used to assess multiple research questions under different parameter settings, such as the effect of spatial clustering on occurrence-to-grid designation and the effect of different patterns of missingness on data quality and robustness of derived indicators. Simulation studies can incorporate scenarios with missing data, enabling researchers to assess the impact of data gaps on analyses within the occurrence cube framework. Furthermore, the development of a visualisation tool for the simulated cubes can enhance the understanding of data clustering and missingness within the simulated environment. By creating a visual representation, researchers can effectively aid to interpret patterns of clustered data as well as identify areas where data is missing. This visualization capability contributes to a more comprehensive exploration of the simulated scenarios, allowing for deeper insights into the behaviour of aggregated heterogenous biodiversity data.
 
 The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the methods and results of projects 2 and 8 during this hackathon. The final commit hash of the GitHub repo is given at the end of this paper. In this paper, we use the function and argument names of the stable R package version developed after the hackathon (v0.4.0, @langeraert2024gcube), because some names were changed shortly after the hackathon and will improve clarity regarding argument and function usage.
 
@@ -575,10 +575,6 @@ ggplot() +
 
 ![](./figures/readme-visualise-designation-1.png){width=400px}
 
-# Discussion
-
-...
-
 # Conclusions and future work
 
 - summarise take away message
@@ -603,7 +599,7 @@ The **gcube** code repository can be found here: https://github.com/b-cubed-eu/g
 
 https://github.com/b-cubed-eu/gcube/commit/6cceb2b229ac25d1df47a9c3a2e20b464f827e18
 
-The current package version, at the time of publishing this paper, is 0.4.0 [@langeraert2024gcube]. It contains several vignettes and functions that provide calculation of data cubes for multiple species at once. Unit tests are added and documentation is completed.
+The current package version, at the time of publishing this paper, is 0.4.0 [@langeraert2024gcube]. It contains several vignettes on the pkgdown website that explain the simulation workflow in detail. Also, functions are added that provide calculation of data cubes for multiple species at once, unit tests are added and documentation is completed.
 
 # Acknowledgements
 We would like to express our gratitude to the Horizon Europe funded B-Cubed (Biodiversity Building Blocks for policy) project for the organisation of this hackathon.
