@@ -105,17 +105,17 @@ Simulation, Data cubes, Biodiversity, B-Cubed, Monte-Carlo, R package
 ...
 
 # Introduction
-Simulation studies offer numerous benefits due to their ability to mimic real-world scenarios in controlled and customizable environments. Ecosystems and biodiversity data are very complex and involve a multitude of interacting factors. Simulations allow researchers to model and to understand the effects of the complexity of ecological systems by varying parameters such as spatial and/or temporal clustering, species prevalence, etc.
+Simulation studies offer numerous benefits due to their ability to mimic real-world scenarios in controlled and customizable environments. Ecosystems and biodiversity data are very complex and involve a multitude of interacting factors. Simulations allow researchers to model and to understand the effects of the complexity of ecological systems by varying parameters such as spatial and/or temporal clustering and species prevalence.
 
 During the B-Cubed Hackathon (Hacking Biodiversity Data Cubes for Policy), we aimed to create a practical simulation framework for biodiversity data cubes based on Monte Carlo methods (= based on repeated random sampling). This framework is composed of three steps ([Fig. 1](#Figure_1)):
 
-1. The occurrence process: Simulating occurrences of multiple species distributed in a landscape over a temporal scope. This will depend on the **rarity**, which can differ between species and over time, and their **spatial clustering**, which can differ between species. A challenge for this part is to implement a consistent **spatial and temporal autocorrelation** for simulated species trends.
-2. The detection process: Simulation of a variety of observation processes can generate actual occurrence datasets. Each species has a different **detection probability**. The detection process will also depend on the **sampling effort** which can be different among spatial and temporal dimensions. We can also assign a spatial uncertainty to each observation.
-3. The grid designation process: Based on their spatial uncertainty, occurrences can be designated to grid cells of a larger grid to form a data cube.
+1. The occurrence process: Simulating occurrences of multiple species distributed in a landscape over a temporal scope. This depends on the **rarity**, which can differ between species and over time, and their **spatial clustering**, which can differ between species. A challenge for this part is to implement a consistent **spatial and temporal autocorrelation** for simulated species trends.
+2. The detection process: Simulation of a variety of observation processes generates actual occurrence datasets. Each species has a different **detection probability**. The detection process also depends on the **sampling effort** which can be different among spatial and temporal dimensions. A spatial uncertainty can be assigned to each observation.
+3. The grid designation process: Based on their spatial uncertainty, occurrences are designated to grid cells of a larger grid to form a data cube.
 
 The simulation framework can be used to assess multiple research questions under different parameter settings, such as the effect of clustering on occurrence-to-grid designation and the effect of different patterns of missingness on data quality and indicator robustness. Simulation studies can incorporate scenarios with missing data, enabling researchers to assess the impact of data gaps on analyses. Understanding how missing data influences results is crucial for improving data collection strategies and addressing potential biases. With this, the secondary objective of the simulation study is to develop a visualisation tool for the simulated cubes. This tool aims to enhance the understanding of data clustering and missingness within the simulated environment. By creating a visual representation, researchers can effectively aid to interpret patterns of clustered data as well as identify areas where data is missing. This visualization capability contributes to a more comprehensive exploration of the simulated scenarios, allowing for deeper insights into the behaviour of data within the context of the study.
 
-The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the methods and results of projects 2+8 during this hackathon unless mentioned otherwise. The final commit hash of the GitHub repo is given at the end of this paper. Some function and argument names might be slighty different in this paper, because they were changed shortly after the hackathon and are used here as such to improve clarity.
+The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the methods and results of projects 2 and 8 during this hackathon unless mentioned otherwise. The final commit hash of the GitHub repo is given at the end of this paper. Some function and argument names might be slighty different in this paper, because they were changed shortly after the hackathon and are used here as such to improve clarity.
 
 ![Simulation framework for biodiversity data cubes. An example of three species that differ in rarity, clustering and detection probability/sampling effort.](./figures/visual_proposal.png){#Figure_1
 .Figure}
@@ -169,11 +169,11 @@ An sf object with POLYGON geometry indicating the spatial extend to simulate occ
 
 - **initial_average_abundance**:
 
-A positive integer value indicating the average number of occurrences to be simulated within the extend of `polygon` at time point 1. This value will be used as mean of a Poisson distribution ($\lambda$ parameter).
+A positive integer value indicating the average number of occurrences to be simulated within the extend of `polygon` at time point 1. This value is used as mean of a Poisson distribution ($\lambda$ parameter).
 
 - **spatial_autocorr**:
 
-`"random"`, `"clustered"`, `"regular"` or a numeric value between -1 and 1 representing Moran's I. `"random"` corresponds to 0, `"clustered"` to 0.9 and `"regular"` to -0.9.
+`"random"`, `"clustered"`, `"regular"` or a numeric value between -1 and 1 representing Moran's I, indicating spatial autocorrelation. `"random"` corresponds to 0, `"clustered"` to 0.9 and `"regular"` to -0.9.
 
 - **n_time_points**:
 
@@ -181,7 +181,7 @@ A positive integer value indicating the number of time points to simulate.
 
 - **temporal_autocorr**:
 
-`NA`, `"random_walk"` or a function which generates a trend in abundance over time. Only used if `time_points > 1`. When there are multiple time points and `"random_walk"` is selected, an internal function can be used to create a random walk over time. The user is also free to specify its own function that depends on `initial_average_abundance` and `n_time_points`, e.g. a linearly decreasing trend over time.
+`NA`, `"random_walk"` or a function which generates a trend in abundance over time, indicating temporal autocorrelation. Only used if `time_points > 1`. When there are multiple time points and `"random_walk"` is selected, an internal function can be used to create a random walk over time. The user is also free to specify its own function that depends on `initial_average_abundance` and `n_time_points`, e.g. a linearly decreasing trend over time.
 
 - **spatiotemporal_autocorr**:
 
@@ -216,7 +216,7 @@ A numeric value between 0 and 1, corresponding to the probability of detection o
 
 - **sampling_bias**:
 
-`"no_bias"`, `"polygon"` or `"manual"`. The method used to generate a sampling bias (cf. the **virtualspecies** package @leroy2016virtualspecies). `"polygon"`: bias the sampling in a polygon. Provide your polygon to `bias_area`. Provide bias strength to `bias_strength`. `"manual"`: bias the sampling manually via a raster. Provide your raster layer in which each cell contains the probability to be sampled to `bias_weights`.
+`"no_bias"`, `"polygon"` or `"manual"`. The method used to generate a sampling bias (cf. the **virtualspecies** package by @leroy2016virtualspecies). `"polygon"`: bias the sampling in a polygon. Provide your polygon to `bias_area`. Provide bias strength to `bias_strength`. `"manual"`: bias the sampling manually via a raster. Provide your raster layer in which each cell contains the probability to be sampled to `bias_weights`.
 
 - **bias_area**:
 
@@ -224,7 +224,7 @@ A numeric value between 0 and 1, corresponding to the probability of detection o
 
 - **bias_strength**:
 
-`NA` or a positive numeric value. Only used if `sampling_bias = "polygon"`. The strength of the bias to be applied in the biased area (as a multiplier). Above 1, area will be oversampled. Below 1, area will be undersampled. For example, a value of 50 will result in 50 times more samples within the `bias_area` than outside. Conversely, a value of 0.5 will result in half less samples within the `bias_area` than outside.
+`NA` or a positive numeric value. Only used if `sampling_bias = "polygon"`. The strength of the bias to be applied in the biased area (as a multiplier). Above 1, area will be oversampled. Below 1, area will be undersampled. For example, a value of 50 results in 50 times more samples within the `bias_area` than outside of it. Conversely, a value of 0.5 results in half less samples within the `bias_area` than outside of it.
 
 - **bias_weights**:
 
@@ -368,7 +368,7 @@ simulate_timeseries(
 )
 ```
 
-The initial number of occurrences (`initial_average_occurrences`) and temporal trend function (`temporal_function`) generate a number of occurrences for each time point (total number of time points is given by `n_time_points`). If the temporal function is `NA` (default), it will sample `n_time_points` times from a Poisson distribution with average equal to `initial_average_occurrences`. You can also specify a function which generates a trend in number of occurrences over time. This can be the internal function `simulate_random_walk()` or a custom function that takes `initial_average_occurrences` and `n_time_points` as arguments. Additional arguments for the temporal function can be passed to the ellipsis argument (`...`). The specified temporal function will calculate a number of occurrences for each time point according to a certain function (e.g. a random walk in case of `temporal_function = simulate_random_walk`) and draw this from a Poisson distribution
+The initial number of occurrences (`initial_average_occurrences`) and temporal trend function (`temporal_function`) generate a number of occurrences for each time point (total number of time points is given by `n_time_points`). If the temporal function is `NA` (default), it samples `n_time_points` times from a Poisson distribution with average equal to `initial_average_occurrences`. You can also specify a function which generates a trend in number of occurrences over time. This can be the internal function `simulate_random_walk()` or a custom function that takes `initial_average_occurrences` and `n_time_points` as arguments. Additional arguments for the temporal function can be passed to the ellipsis argument (`...`). The specified temporal function calculates a number of occurrences for each time point according to a certain function (e.g. a random walk in case of `temporal_function = simulate_random_walk`) and draw this from a Poisson distribution
 
 The spatial component of `simulate_occurrences()` is executed by the `create_spatial_pattern()` and `sample_occurrences_from_raster()` supporting functions. 
 
@@ -412,7 +412,7 @@ sample_observations(
 
 Detection probability (`detection_probability`) is be passed as a numeric value between 0 and 1. For sampling bias there are three options specified in `sampling_bias` (cf. @leroy2016virtualspecies).
 
-1. With `"no_bias"`, only the detection probability value will decide whether an occurrence is observed or not. If `detection_probability = 1` and `sampling_bias = "no_bias"`, all occurrences are detected.
+1. With `"no_bias"`, only the detection probability value decides whether an occurrence is observed or not. If `detection_probability = 1` and `sampling_bias = "no_bias"`, all occurrences are detected.
 2. With `"polygon"`, bias weights depend on their location inside or outside a given polygon with a certain bias strength. This is accomplished by the supporting function `apply_polygon_sampling_bias()`.
 
 ``` r
@@ -465,7 +465,7 @@ grid_designation(
 )
 ```
 
-This function designates observations (`observations`) to cells of a given grid (`grid`) to create a data cube. `id_col` specifies the column name of the column with unique ids for each grid cell. If `id_col = "row_names"` (the default), a new column `id` is created where the row names represent the unique ids. If `aggregate = TRUE` (default), return data cube in aggregated form (grid with number of observations per grid cell). Otherwise, return sampled points in uncertainty circle. The randomisation method, specified with `randomisation`, is used for sampling within uncertainty circle around each observation. By default `"uniform"` which means each point uncertainty circle has an equal probability to be selected. If no coordinate uncertainty is present, the function takes the point itself for designation. The other option is `"normal"` where a point is sampled from a bivariate Normal distribution with means equal to the observation point and the variance equal to (-`coordinateUncertaintyInMeters`^2) / (2 * log(1 - `p_norm`)) such that `p_norm` % of all possible samples from this Normal distribution fall within the uncertainty circle. `p_norm` is only used if `randomisation = "normal"` and has the default value of 0.95. Uniform is the standard method to create biodiversity data cubes. The normal randomisation is an experimental feature.
+This function designates observations (`observations`) to cells of a given grid (`grid`) to create a data cube. `id_col` specifies the column name of the column with unique ids for each grid cell. If `id_col = "row_names"` (the default), a new column `id` is created where the row names represent the unique ids. If `aggregate = TRUE` (default), the data cube is returned in aggregated form (grid with number of observations per grid cell). Otherwise, return sampled points in uncertainty circle. The randomisation method, specified with `randomisation`, is used for sampling within uncertainty circle around each observation. By default `"uniform"` which means each point uncertainty circle has an equal probability to be selected. If no coordinate uncertainty is present, the function takes the point itself for designation. The other option is `"normal"` where a point is sampled from a bivariate Normal distribution with means equal to the observation point and the variance equal to (-`coordinateUncertaintyInMeters`^2) / (2 * log(1 - `p_norm`)) such that `p_norm` % of all possible samples from this Normal distribution fall within the uncertainty circle. `p_norm` is only used if `randomisation = "normal"` and has the default value of 0.95. Uniform is the standard method to create biodiversity data cubes. The normal randomisation is an experimental feature.
 
 The following imports and suggests were used. Packages listed under 'imports' are essential for the package to function and are automatically loaded when **gcube** is loaded. Packages listed under 'suggests' are not essential for the basic functionality of the package but are useful for certain optional features, examples, or tests. These packages are not automatically loaded when **gcube** is loaded.
 
@@ -489,7 +489,7 @@ The following imports and suggests were used. Packages listed under 'imports' ar
 ## Incorporation of virtual species to the simulation workflow
 Project 8 originally aimed to address the challenges of incomplete and unreliable biodiversity data which hinder accurate species distribution models (SDMs). By creating virtual species with known ecological characteristics, researchers can simulate and analyse the effects of spatial, temporal, and taxonomic uncertainties. This "virtual ecologist" approach helps quantify sources of error and refine modelling techniques. The goal is to improve conservation planning, especially for rare or endangered species, by providing more reliable predictions of species distributions under various environmental conditions, including climate change.
 
-At an early stage of the hackathon, it was decided to integrate the concepts and ideas developed by this group would be integrated into the cube simulation package of group 2. This decision was influenced by the existing proposal to incorporate a virtual species workflow using the **virtualspecies** package, as mentioned above. The focus was primarily on discussions, conceptualization, and experimentation with the code of both the **virtualspecies** package and the **gcube** package as it was being developed at the time.
+At an early stage of the hackathon, it was decided to integrate the concepts and ideas developed by this group would into the cube simulation package of group 2. This decision was influenced by the existing proposal to incorporate a virtual species workflow using the **virtualspecies** package, as mentioned above. The focus was primarily on discussions, conceptualization, and experimentation with the code of both the **virtualspecies** package and the **gcube** package as it was being developed at the time.
 
 The idea of working with a virtual species approach in **gcube**, is that simulations can start from two points.
 
@@ -507,7 +507,7 @@ We identified the needs for future development of the virtual species approach. 
 This was mainly conceptual and not implemented in the package yet.
 
 # gcube workflow example
-This is a basic example from the README which shows the workflow for simulating a biodiversity data cube using the **gcube** package. An example for one time point for a single species (the default). This is not the exact README example from the hackathon, but a cleaned version from the week after. It uses the exact code as developed during the hackathon, but at that time we did not have enough time to create a clean README example.
+This is a basic example from the README which shows the workflow for simulating a biodiversity data cube using the **gcube** package. It is an example for one time point for a single species (the default). This is not the exact README example from the hackathon, but a cleaned version from the week after.
 
 The functions are designed such that a single polygon as input is enough to go through this workflow using default arguments. The user can change these arguments to allow for more flexibility.
 
@@ -583,7 +583,7 @@ ggplot() +
 ![](./figures/readme-detect-occurrences-1.png){width=400px}
 
 We select the detected occurrences and add an uncertainty to these
-observations. This can be done using the `add_coordinate_uncertainty()`
+observations, by using the `add_coordinate_uncertainty()`
 function.
 
 ``` r
