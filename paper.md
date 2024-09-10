@@ -712,7 +712,7 @@ ggplot() +
 https://github.com/b-cubed-eu/gcube/commit/6cceb2b229ac25d1df47a9c3a2e20b464f827e18
 if function names or arguments are differentin this paper, it is because it was changed shortly after the hackathon and is used here as such to improve clarity
 
-- current pkgdown website and say that at the time of writing this, there is a version 0.1.0 with vignettes etc.
+- current pkgdown website and say that at the time of writing this, there is a version 0.4.0 with vignettes etc. [@langeraert2024gcube]
 
 # Acknowledgements
 We would like to express our gratitude to the Horizon Europe funded B-Cubed (Biodiversity Building Blocks for policy) project for the organisation of this hackathon.
