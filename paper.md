@@ -117,13 +117,12 @@ The simulation framework can be used to assess multiple research questions under
 
 The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the methods and results of projects 2 and 8 during this hackathon unless mentioned otherwise. The final commit hash of the GitHub repo is given at the end of this paper. Some function and argument names might be slighty different in this paper, because they were changed shortly after the hackathon and are used here as such to improve clarity.
 
-![Simulation framework for biodiversity data cubes. An example of three species that differ in rarity, clustering and detection probability/sampling effort.](./figures/visual_proposal.png){#Figure_1
-.Figure}
+![Simulation framework for biodiversity data cubes. An example of three species, represented by different colours, that differ in rarity, clustering and detection probability/sampling effort. White dots are undetected occurrences.](./figures/visual_proposal.png){#Figure_1 .Figure}
 
 # Materials and Methods
 ## Technical setup
 It was *a priori* decided by the first author to build the simulation framework using the R programming language as an R package [@R2024lang], where participants could collaborate efficiently with each other via GitHub (https://github.com/).
-A repository for this package was prepared under the name 'simcuber' and a code structure was proposed for the framework (see next subsection).
+A repository for this package was prepared and a code structure was proposed for the framework (see next subsection).
 
 Common guidelines for software development (e.g. related to coding style, function naming and unit testing) were mentioned to ensure efficient collaboration as well as future maintenance and development [@huybrechts2024guidelines].
 
@@ -410,7 +409,7 @@ sample_observations(
 )
 ```
 
-Detection probability (`detection_probability`) is be passed as a numeric value between 0 and 1. For sampling bias there are three options specified in `sampling_bias` (cf. @leroy2016virtualspecies).
+Detection probability (`detection_probability`) is passed as a numeric value between 0 and 1. For sampling bias there are three options specified in `sampling_bias` (cf. @leroy2016virtualspecies).
 
 1. With `"no_bias"`, only the detection probability value decides whether an occurrence is observed or not. If `detection_probability = 1` and `sampling_bias = "no_bias"`, all occurrences are detected.
 2. With `"polygon"`, bias weights depend on their location inside or outside a given polygon with a certain bias strength. This is accomplished by the supporting function `apply_polygon_sampling_bias()`.
@@ -500,11 +499,12 @@ We identified the needs for future development of the virtual species approach. 
 
 | **virtualspecies** function(s) | **virtualspecies** output | Link function **gcube** | **gcube** function(s) |
 |--------------------------------|---------------------------|-------------------------|-----------------------|
-| `generateSpFromFun()` or `generateSpFromPCA()` | environmental suitability map | `rescale_suitability_raster()`?  | `simulate_occurrences()` |
-| `convertToPA()` | presence-absence map | `occurrences_from_raster()`? | `sample_observations()` |
-| `sampleOccurrences()` | sampled presence points | `virtual_occurrences_to_sf()`? | `add_coordinate_uncertainty()` and/or `grid_designation()` |
+| `generateSpFromFun()` or `generateSpFromPCA()` | environmental suitability map | `rescale_suitability_raster()`  | `simulate_occurrences()` |
+| `convertToPA()` | presence-absence map | `occurrences_from_raster()` | `sample_observations()` |
+| `sampleOccurrences()` | sampled presence points | `virtual_occurrences_to_sf()` | `add_coordinate_uncertainty()` and/or `grid_designation()` |
 
 This was mainly conceptual and not implemented in the package yet.
+The the link functions are suggestions which can differ from actual future implementation.
 
 # gcube workflow example
 This is a basic example from the README which shows the workflow for simulating a biodiversity data cube using the **gcube** package. It is an example for one time point for a single species (the default). This is not the exact README example from the hackathon, but a cleaned version from the week after.
