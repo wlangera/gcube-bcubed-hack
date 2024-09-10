@@ -79,7 +79,7 @@ affiliations:
    index: 7
  - name: Department of Mathematical Sciences, Stellenbosch University, Stellenbosch Central, Stellenbosch, South Africa
    index: 8
-date: 18 July 2024
+date: 10 September 2024
 bibliography: paper.bib
 authors_short: Langeraert et al.
 group: Projects 2+8
@@ -117,7 +117,7 @@ There are R packages available for simulation of ecological communities [e.g. @m
 
 This simulation framework can be used to assess multiple research questions under different parameter settings, such as the effect of spatial clustering on occurrence-to-grid designation and the effect of different patterns of missingness on data quality and robustness of derived indicators. Simulation studies can incorporate scenarios with missing data, enabling researchers to assess the impact of data gaps on analyses within the occurrence cube framework. Furthermore, the development of a visualisation tool for the simulated cubes can enhance the understanding of data clustering and missingness within the simulated environment. By creating a visual representation, researchers can effectively aid to interpret patterns of clustered data as well as identify areas where data is missing. This visualization capability contributes to a more comprehensive exploration of the simulated scenarios, allowing for deeper insights into the behaviour of data within the context of the study.
 
-The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the methods and results of projects 2 and 8 during this hackathon unless mentioned otherwise. The final commit hash of the GitHub repo is given at the end of this paper. Some function and argument names might be slighty different in this paper, because they were changed shortly after the hackathon and are used here as such to improve clarity.
+The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the methods and results of projects 2 and 8 during this hackathon. The final commit hash of the GitHub repo is given at the end of this paper. In this paper, we use the function and argument names of the stable R package version developed after the hackathon (v0.4.0, @langeraert2024gcube), because some names were changed shortly after the hackathon and will improve clarity regarding argument and function usage.
 
 ![Simulation framework for biodiversity data cubes. An example of three species, represented by different colours, that differ in rarity, clustering and detection probability/sampling effort. White dots are undetected occurrences.](./figures/visual_proposal.png){#Figure_1 .Figure}
 
@@ -130,6 +130,9 @@ Common guidelines for software development (e.g. related to coding style, functi
 
 ## Code architecture
 General code architecture of the package was proposed following preparation of the hackathon by the first author.
+The provided pseudocode and ideas for implementation are provided in [Appendix 1](#appendix1).
+It is very similar to the developed and functional code described further in the results.
+
 As indicated in the introduction, the simulation framework and thus the R package can be divided into three consecutive processes related to different variables that depend on *species*, *observation*, *space* and *time*.
 
 1. occurrence process
@@ -147,120 +150,6 @@ For grid designation, R code was already available as the function `grid_designa
 | detection  | spatial uncertainty    | observation   |
 
 The three processes can be described in three main functions respectively `simulate_occurrences()`, `sample_observations()` and `grid_designation()`. Each main function consists of multiple supporting functions, for example per variable mentioned above or for specific subprocesses (e.g. temporal autocorrelation).
-
-Some (pseudo)code and ideas for implementation were provided by the first author for `simulate_occurrences()` and `sample_observations()` on the first day:
-
-**1. Occurrence process**
-
-``` r
-simulate_occurrences(
-  polygon,
-  initial_average_abundance = 50,
-  spatial_autocorr = c("random", "clustered", "regular"),
-  n_time_points = 10,
-  temporal_autocorr = ifelse(time_points ==  1, NA, "random_walk"),
-  spatiotemporal_autocorr = NA,
-  seed = NA
-)
-```
-
-- **polygon**:
-
-An sf object with POLYGON geometry indicating the spatial extend to simulate occurrences.
-
-- **initial_average_abundance**:
-
-A positive integer value indicating the average number of occurrences to be simulated within the extend of `polygon` at time point 1. This value is used as mean of a Poisson distribution ($\lambda$ parameter).
-
-- **spatial_autocorr**:
-
-`"random"`, `"clustered"`, `"regular"` or a numeric value between -1 and 1 representing Moran's I, indicating spatial autocorrelation. `"random"` corresponds to 0, `"clustered"` to 0.9 and `"regular"` to -0.9.
-
-- **n_time_points**:
-
-A positive integer value indicating the number of time points to simulate.
-
-- **temporal_autocorr**:
-
-`NA`, `"random_walk"` or a function which generates a trend in abundance over time, indicating temporal autocorrelation. Only used if `time_points > 1`. When there are multiple time points and `"random_walk"` is selected, an internal function can be used to create a random walk over time. The user is also free to specify its own function that depends on `initial_average_abundance` and `n_time_points`, e.g. a linearly decreasing trend over time.
-
-- **spatiotemporal_autocorr**:
-
-A numeric value between indicating the strength of spatiotemporal autocorrelation.
-
-- **seed**:
-
-A positive numeric value. The seed for random number generation to make results reproducible. If `NA` (the default), no seed is used.
-
-**2. Detection process**
-
-``` r
-sample_observations(
-  occurrences,
-  detection_probability = 1,
-  sampling_bias = c("no_bias", "polygon", "manual"),
-  bias_area = NA,
-  bias_strength = NA,
-  bias_weights = NA,
-  coordinate_uncertainty_meters = 25,
-  seed = NA
-)
-```
-
-- **occurrences**:
-
-An sf object with POINT geometry.
-
-- **detection_probability**:
-
-A numeric value between 0 and 1, corresponding to the probability of detection of the species.
-
-- **sampling_bias**:
-
-`"no_bias"`, `"polygon"` or `"manual"`. The method used to generate a sampling bias (cf. the **virtualspecies** package by @leroy2016virtualspecies). `"polygon"`: bias the sampling in a polygon. Provide your polygon to `bias_area`. Provide bias strength to `bias_strength`. `"manual"`: bias the sampling manually via a raster. Provide your raster layer in which each cell contains the probability to be sampled to `bias_weights`.
-
-- **bias_area**:
-
-`NA` or an sf object with POLYGON geometry. Only used if `sampling_bias = "polygon"`. The area in which the sampling will be biased.
-
-- **bias_strength**:
-
-`NA` or a positive numeric value. Only used if `sampling_bias = "polygon"`. The strength of the bias to be applied in the biased area (as a multiplier). Above 1, area will be oversampled. Below 1, area will be undersampled. For example, a value of 50 results in 50 times more samples within the `bias_area` than outside of it. Conversely, a value of 0.5 results in half less samples within the `bias_area` than outside of it.
-
-- **bias_weights**:
-
-`NA` or a raster layer (sf object with POLYGON geometry, or SpatRaster object). Only used if `sampling_bias = "manual"`. The raster of bias weights to be applied to the sampling of occurrences. Higher weights mean a higher probability of sampling. Weights can be numeric values between 0 and 1 or positive integers that will be rescaled to values between 0 and 1.
-
-- **coordinate_uncertainty_meters**:
-
-A positive numeric value or vector with length `nrow(occurrences)` describing the uncertainty in meters around each observation.
-
-- **seed**:
-
-A positive numeric value. The seed for random number generation to make results reproducible. If `NA` (the default), no seed is used.
-
-Finally, we also have the function `add_coordinate_uncertainty()`.
-
-``` r   
-add_coordinate_uncertainty(
-  occurrences,
-  coordinate_uncertainty_meters = 25
-)
-```
-
-This function is a supporting function for `sample_observations()` to add a `coordinateUncertaintyInMeters` column that should also be exported in case users simulate observations based on virtual species distributions. This can for example be accomplished using the **virtualspecies** package [@leroy2016virtualspecies]:
-
-1.  Species-environment relationship
-    -   `generateSpFromFun()`
-    -   `generateSpFromPCA()`
-2.  Conversion to presence-absence
-    -   `convertToPA()`
-    -   introduce distribution bias: `limitDispersal()`
-3.  Sample occurrences
-    -   `sampleOccurrences()`
-4.  Convert to sf object with POINT geometry
-    -   `sf::st_as_sf()`
-    -   create helper function `virtualspecies_to_sf()`?
 
 ## Collaboration and division of tasks
 Following the information provided in the previous subsections, four types of tasks were distinguished ([Fig. 2](#Figure_2)).
@@ -345,9 +234,9 @@ The `simulate_occurrences()` function generates occurrences of a species within 
 
 ``` r
 simulate_occurrences(
-  plgn,
+  species_range,
   initial_average_occurrences = 50,
-  spatial_autocorr = c("random", "clustered"),
+  spatial_pattern = c("random", "clustered"),
   n_time_points = 1,
   temporal_function = NA,
   ...,
@@ -355,7 +244,7 @@ simulate_occurrences(
 )
 ```
 
-The input (`plgn`) should be an sf object with POLYGON geometry indicating the spatial extend to simulate occurrences.
+The input (`species_range`) should be an sf object with POLYGON geometry indicating the spatial extend to simulate occurrences.
 
 The temporal component of this function is executed by the `simulate_timeseries()` supporting function.
 
@@ -383,17 +272,17 @@ create_spatial_pattern(
 )
 ```
 
-`create_spatial_pattern()` creates a raster for the area of a polygon (`polygon`) with a resolution (`resolution`) according to a spatial patter `spatial_pattern`. `"random"` is the default pattern. The user is able to provide a numeric value >= 1 (1 is "random" and 10 is "clustered"). A larger number means a broader size of the clusters. This number changes the range parameter of the spherical variogram model. `spatial_pattern = 1` means the range has the same size of the grid cell, which is defined in resolution argument (calculated by `simulate_timeseries()` as one hundredth of the extend of the polygon). We use the function `gstat::vgm()` to implement the spherical variogram model [@gstat2016Graler].
+`create_spatial_pattern()` creates a raster for the area of a polygon (`polygon`) with a resolution (`resolution`) according to a spatial patter `spatial_pattern`. `"random"` is the default pattern. The user is able to provide a numeric value >= 1 (1 is "random" and 10 is "clustered"). A larger number means a broader size of the clusters. This number changes the range parameter of the spherical variogram model. `spatial_pattern = 1` means the range has the same size of the grid cell, which is defined in resolution argument (calculated by `simulate_occurrences()` as one hundredth of the extend of the polygon). We use the function `gstat::vgm()` to implement the spherical variogram model [@gstat2016Graler].
 
 ``` r
 sample_occurrences_from_raster(
-  rs,
-  ts,
+  raster,
+  time_series,
   seed = NA
 )
 ```
 
-The raster output of `create_spatial_pattern()` is then used as input for `sample_occurrences_from_raster()` (`rs`). From this raster, it samples a number of occurrences (`ts`) as provided by `simulate_timeseries()` for each time point using `terra::spatSample()` [@terra2024hijmans]. The final result is thus a number of occurrences sampled from a spatial pattern for multiple time points which is passed as output for `simulate_occurrences()`.
+The raster output of `create_spatial_pattern()` is then used as input for `sample_occurrences_from_raster()` (argument `raster`). From this raster, it samples a number of occurrences (argument `time_series`) as provided by `simulate_timeseries()` for each time point using `terra::spatSample()` [@terra2024hijmans]. The final result is thus a number of occurrences sampled from a spatial pattern for multiple time points which is passed as output for `simulate_occurrences()`.
 
 **2. Detection process**
 
@@ -488,7 +377,7 @@ The following imports and suggests were used. Packages listed under 'imports' ar
 | suggests | **testthat** | [@testthat2011wickham]           |
 
 ## Incorporation of virtual species to the simulation workflow
-Project 8 originally aimed to address the challenges of incomplete and unreliable biodiversity data which hinder accurate species distribution models (SDMs). By creating virtual species with known ecological characteristics, researchers can simulate and analyse the effects of spatial, temporal, and taxonomic uncertainties. This "virtual ecologist" approach helps quantify sources of error and refine modelling techniques. The goal is to improve conservation planning, especially for rare or endangered species, by providing more reliable predictions of species distributions under various environmental conditions, including climate change.
+Project 8 originally aimed to address the challenges of incomplete and unreliable biodiversity data which hinder accurate species distribution models (SDMs). By creating virtual species with known ecological characteristics, researchers can simulate and analyse the effects of spatial, temporal, and taxonomic uncertainties. This "virtual ecologist" approach helps quantify sources of error and refine modelling techniques [@zurell2010virtualecologist]. The goal is to improve conservation planning, especially for rare or endangered species, by providing more reliable predictions of species distributions under various environmental conditions, including climate change.
 
 At an early stage of the hackathon, it was decided to integrate the concepts and ideas developed by this group would into the cube simulation package of group 2. This decision was influenced by the existing proposal to incorporate a virtual species workflow using the **virtualspecies** package, as mentioned above. The focus was primarily on discussions, conceptualization, and experimentation with the code of both the **virtualspecies** package and the **gcube** package as it was being developed at the time.
 
@@ -548,7 +437,7 @@ over time.
 ``` r
 # Simulate occurrences within polygon
 occurrences_df <- simulate_occurrences(
-  plgn = polygon,
+  species_range = polygon,
   seed = 123)
 #> [using unconditional Gaussian simulation]
 
@@ -708,13 +597,11 @@ ggplot() +
   - issues: e.g. bugs: crs, improvements: column names, enhancements: spatial pattern, spatiotemporal connection
 
 # Links to software
-- gcube repo
+The **gcube** code repository can be found here: https://github.com/b-cubed-eu/gcube. The final commit hash of the GitHub repo at the end of the hackathon:
 
-- Commit hash meegeven van einde hackathon: reference point
 https://github.com/b-cubed-eu/gcube/commit/6cceb2b229ac25d1df47a9c3a2e20b464f827e18
-if function names or arguments are differentin this paper, it is because it was changed shortly after the hackathon and is used here as such to improve clarity
 
-- current pkgdown website and say that at the time of writing this, there is a version 0.4.0 with vignettes etc. [@langeraert2024gcube]
+The current package version, at the time of publishing this paper, is 0.4.0 [@langeraert2024gcube]. It contains several vignettes and functions that provide calculation of data cubes for multiple species at once. Unit tests are added and documentation is completed.
 
 # Acknowledgements
 We would like to express our gratitude to the Horizon Europe funded B-Cubed (Biodiversity Building Blocks for policy) project for the organisation of this hackathon.
@@ -722,3 +609,122 @@ Special thanks go to Laura Abraham of Meise Botanic Garden for her outstanding e
 Additionally, we acknowledge the Research Foundation - Flanders (FWO) and KU Leuven for the support they gave us in making this event possible.
 
 # References
+
+<div id="refs"></div>
+
+# Appendices
+## Appendix 1: Pseudocode provided in preparation of the hackathon{#appendix1}
+
+Some pseudocode and ideas for implementation were provided by the first author for `simulate_occurrences()` and `sample_observations()` on the first day:
+
+**1. Occurrence process**
+
+``` r
+simulate_occurrences(
+  polygon,
+  initial_average_abundance = 50,
+  spatial_autocorr = c("random", "clustered", "regular"),
+  n_time_points = 10,
+  temporal_autocorr = ifelse(time_points ==  1, NA, "random_walk"),
+  spatiotemporal_autocorr = NA,
+  seed = NA
+)
+```
+
+- **polygon**:
+
+An sf object with POLYGON geometry indicating the spatial extend to simulate occurrences.
+
+- **initial_average_abundance**:
+
+A positive integer value indicating the average number of occurrences to be simulated within the extend of `polygon` at time point 1. This value is used as mean of a Poisson distribution ($\lambda$ parameter).
+
+- **spatial_autocorr**:
+
+`"random"`, `"clustered"`, `"regular"` or a numeric value between -1 and 1 representing Moran's I, indicating spatial autocorrelation. `"random"` corresponds to 0, `"clustered"` to 0.9 and `"regular"` to -0.9.
+
+- **n_time_points**:
+
+A positive integer value indicating the number of time points to simulate.
+
+- **temporal_autocorr**:
+
+`NA`, `"random_walk"` or a function which generates a trend in abundance over time, indicating temporal autocorrelation. Only used if `time_points > 1`. When there are multiple time points and `"random_walk"` is selected, an internal function can be used to create a random walk over time. The user is also free to specify its own function that depends on `initial_average_abundance` and `n_time_points`, e.g. a linearly decreasing trend over time.
+
+- **spatiotemporal_autocorr**:
+
+A numeric value between indicating the strength of spatiotemporal autocorrelation.
+
+- **seed**:
+
+A positive numeric value. The seed for random number generation to make results reproducible. If `NA` (the default), no seed is used.
+
+**2. Detection process**
+
+``` r
+sample_observations(
+  occurrences,
+  detection_probability = 1,
+  sampling_bias = c("no_bias", "polygon", "manual"),
+  bias_area = NA,
+  bias_strength = NA,
+  bias_weights = NA,
+  coordinate_uncertainty_meters = 25,
+  seed = NA
+)
+```
+
+- **occurrences**:
+
+An sf object with POINT geometry.
+
+- **detection_probability**:
+
+A numeric value between 0 and 1, corresponding to the probability of detection of the species.
+
+- **sampling_bias**:
+
+`"no_bias"`, `"polygon"` or `"manual"`. The method used to generate a sampling bias (cf. the **virtualspecies** package by @leroy2016virtualspecies). `"polygon"`: bias the sampling in a polygon. Provide your polygon to `bias_area`. Provide bias strength to `bias_strength`. `"manual"`: bias the sampling manually via a raster. Provide your raster layer in which each cell contains the probability to be sampled to `bias_weights`.
+
+- **bias_area**:
+
+`NA` or an sf object with POLYGON geometry. Only used if `sampling_bias = "polygon"`. The area in which the sampling will be biased.
+
+- **bias_strength**:
+
+`NA` or a positive numeric value. Only used if `sampling_bias = "polygon"`. The strength of the bias to be applied in the biased area (as a multiplier). Above 1, area will be oversampled. Below 1, area will be undersampled. For example, a value of 50 results in 50 times more samples within the `bias_area` than outside of it. Conversely, a value of 0.5 results in half less samples within the `bias_area` than outside of it.
+
+- **bias_weights**:
+
+`NA` or a raster layer (sf object with POLYGON geometry, or SpatRaster object). Only used if `sampling_bias = "manual"`. The raster of bias weights to be applied to the sampling of occurrences. Higher weights mean a higher probability of sampling. Weights can be numeric values between 0 and 1 or positive integers that will be rescaled to values between 0 and 1.
+
+- **coordinate_uncertainty_meters**:
+
+A positive numeric value or vector with length `nrow(occurrences)` describing the uncertainty in meters around each observation.
+
+- **seed**:
+
+A positive numeric value. The seed for random number generation to make results reproducible. If `NA` (the default), no seed is used.
+
+Finally, we also have the function `add_coordinate_uncertainty()`.
+
+``` r   
+add_coordinate_uncertainty(
+  occurrences,
+  coordinate_uncertainty_meters = 25
+)
+```
+
+This function is a supporting function for `sample_observations()` to add a `coordinateUncertaintyInMeters` column that should also be exported in case users simulate observations based on virtual species distributions. This can for example be accomplished using the **virtualspecies** package [@leroy2016virtualspecies]:
+
+1.  Species-environment relationship
+    -   `generateSpFromFun()`
+    -   `generateSpFromPCA()`
+2.  Conversion to presence-absence
+    -   `convertToPA()`
+    -   introduce distribution bias: `limitDispersal()`
+3.  Sample occurrences
+    -   `sampleOccurrences()`
+4.  Convert to sf object with POINT geometry
+    -   `sf::st_as_sf()`
+    -   create helper function `virtualspecies_to_sf()`?
