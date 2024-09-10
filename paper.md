@@ -8,10 +8,10 @@ tags:
   - Monte-Carlo
   - R package
 output:
+  pdf_document: default
+  word_document: default
   html_document:
     df_print: paged
-  word_document: default
-  pdf_document: default
   rmarkdown::pdf_document:
     fig_caption: yes        
     includes:  
