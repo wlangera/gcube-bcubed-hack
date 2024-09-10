@@ -575,9 +575,16 @@ ggplot() +
 
 ![](./figures/readme-visualise-designation-1.png){width=400px}
 
-# Conclusions and future work
+# Discussion and future work
+## Collaboration
 
-- summarise take away message
+The methods outlined in this paper proved to be very efficient for hackathon code collaboration. A thorough preparation turned out to be crucial for working together on a single project in a large group. We recommend to set up code repository structure and provide pseudocode (architecture) beforehand if possible. This way, all participants can focus on the content of the project from the start. Defining modular tasks in advance and preparing an interactive follow-up schedule (the scrum board) also helped to ensure participant engagement and a quick and smooth onset of code development.
+
+## Current shortcommings
+
+
+
+## Future development
 
 - to do after the hackathon
   - clean-up code
@@ -595,11 +602,13 @@ ggplot() +
   - issues: e.g. bugs: crs, improvements: column names, enhancements: spatial pattern, spatiotemporal connection
 
 # Links to software
-The **gcube** code repository can be found here: https://github.com/b-cubed-eu/gcube. The final commit hash of the GitHub repo at the end of the hackathon:
+The **gcube** code repository can be found here: https://github.com/b-cubed-eu/gcube. The pkgdown website here: https://b-cubed-eu.github.io/gcube. The final commit hash of the GitHub repo at the end of the hackathon:
 
 https://github.com/b-cubed-eu/gcube/commit/6cceb2b229ac25d1df47a9c3a2e20b464f827e18
 
 The current package version, at the time of publishing this paper, is 0.4.0 [@langeraert2024gcube]. It contains several vignettes on the pkgdown website that explain the simulation workflow in detail. Also, functions are added that provide calculation of data cubes for multiple species at once, unit tests are added and documentation is completed.
+
+The B-Cubed hackathon repository can be found here: https://github.com/b-cubed-eu/hackathon-projects-2024. It contains R Markdown scripts in preparation of the event.
 
 # Acknowledgements
 We would like to express our gratitude to the Horizon Europe funded B-Cubed (Biodiversity Building Blocks for policy) project for the organisation of this hackathon.
