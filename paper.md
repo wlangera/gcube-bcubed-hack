@@ -117,8 +117,7 @@ The simulation framework can be used to assess multiple research questions under
 
 The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the methods and results of projects 2 and 8 during this hackathon unless mentioned otherwise. The final commit hash of the GitHub repo is given at the end of this paper. Some function and argument names might be slighty different in this paper, because they were changed shortly after the hackathon and are used here as such to improve clarity.
 
-![Simulation framework for biodiversity data cubes. An example of three species that differ in rarity, clustering and detection probability/sampling effort.](./figures/visual_proposal.png){#Figure_1
-.Figure}
+![Simulation framework for biodiversity data cubes. An example of three species, represented by different colours, that differ in rarity, clustering and detection probability/sampling effort. White dots are undetected occurrences.](./figures/visual_proposal.png){#Figure_1 .Figure}
 
 # Materials and Methods
 ## Technical setup
