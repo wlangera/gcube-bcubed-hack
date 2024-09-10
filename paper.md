@@ -8,10 +8,10 @@ tags:
   - Monte-Carlo
   - R package
 output:
-  pdf_document: default
-  word_document: default
   html_document:
     df_print: paged
+  word_document: default
+  pdf_document: default
   rmarkdown::pdf_document:
     fig_caption: yes        
     includes:  
@@ -50,7 +50,7 @@ authors:
   - name: Matilde Martini
     orcid: 0009-0003-5612-925X
     affiliation: 3
-  - name: Arthur Rodrigues
+  - name: Arthur V. Rodrigues
     orcid: 0000-0003-2656-558X
     affiliation: 6
   - name: Annegreet Veeken
@@ -73,7 +73,7 @@ affiliations:
    index: 4
  - name: Biodiversity Knowledge Integration Center, School of Life Sciences, Arizona State University, Tempe, AZ 852281, USA
    index: 5
- - name: Organismal and Evolutionary Biology Research Programme, University of Helsinki, Viikinkaari 1, 00790 Helsinki, Finland
+ - name: Research Centre for Ecological Change, Organismal and Evolutionary Biology Research Programme, University of Helsinki, Viikinkaari 1, 00790 Helsinki, Finland
    index: 6
  - name: Copernicus Institute of Sustainable Development, Utrecht University, Princetonlaan 8a, 3584 CB Utrecht, The Netherlands
    index: 7
@@ -105,7 +105,11 @@ Simulation, Data cubes, Biodiversity, B-Cubed, Monte-Carlo, R package
 ...
 
 # Introduction
-Simulation studies offer numerous benefits due to their ability to mimic real-world scenarios in controlled and customizable environments. Ecosystems and biodiversity data are very complex and involve a multitude of interacting factors. Simulations allow researchers to model and to understand the effects of the complexity of ecological systems by varying parameters such as spatial and/or temporal clustering and species prevalence.
+Simulation studies offer numerous benefits due to their ability to mimic real-world scenarios in controlled and customizable environments. Ecosystems and biodiversity data are very complex and involve a multitude of interacting factors. Some of those factors belong to the occurrence (biological) process, such as responses to environmental gradients and environmental change, while other factors belong to the detection (sampling) process, such as sampling effort and bias, positional uncertainty of observations and species detectability. Simulations allow researchers to model and to understand the effects of the complexity of ecological systems [@zurell2010virtualecologist] by creating a controlled environment where the effects of biological and sampling processes can be disentangled. 
+
+There are R packages available for simulation of ecological communities [e.g. @may2018mobsim; @sokol2015linking] as well as species distribution [@leroy2016virtualspecies]. However, we lack tools that integrate the simulation of species distribution in space and time with respect to biodiversity data cubes. 
+
+{*would be nice to have a general intro about biodiverity data cubes and its applicability*}
 
 During the B-Cubed Hackathon (Hacking Biodiversity Data Cubes for Policy), we aimed to create a practical simulation framework for biodiversity data cubes based on Monte Carlo methods (= based on repeated random sampling). This framework is composed of three steps ([Fig. 1](#Figure_1)):
 
