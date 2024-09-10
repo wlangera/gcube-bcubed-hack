@@ -122,7 +122,7 @@ The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the m
 # Materials and Methods
 ## Technical setup
 It was *a priori* decided by the first author to build the simulation framework using the R programming language as an R package [@R2024lang], where participants could collaborate efficiently with each other via GitHub (https://github.com/).
-A repository for this package was prepared under the name 'simcuber' and a code structure was proposed for the framework (see next subsection).
+A repository for this package was prepared and a code structure was proposed for the framework (see next subsection).
 
 Common guidelines for software development (e.g. related to coding style, function naming and unit testing) were mentioned to ensure efficient collaboration as well as future maintenance and development [@huybrechts2024guidelines].
 
