@@ -73,7 +73,7 @@ affiliations:
    index: 4
  - name: Biodiversity Knowledge Integration Center, School of Life Sciences, Arizona State University, Tempe, AZ 852281, USA
    index: 5
- - name: Organismal and Evolutionary Biology Research Programme, University of Helsinki, Viikinkaari 1, 00790 Helsinki, Finland
+ - name: Research Centre for Ecological Change, Organismal and Evolutionary Biology Research Programme, University of Helsinki, Viikinkaari 1, 00790 Helsinki, Finland
    index: 6
  - name: Copernicus Institute of Sustainable Development, Utrecht University, Princetonlaan 8a, 3584 CB Utrecht, The Netherlands
    index: 7
