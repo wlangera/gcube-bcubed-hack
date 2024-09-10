@@ -148,7 +148,7 @@ For grid designation, R code was already available as the function `grid_designa
 
 The three processes can be described in three main functions respectively `simulate_occurrences()`, `sample_observations()` and `grid_designation()`. Each main function consists of multiple supporting functions, for example per variable mentioned above or for specific subprocesses (e.g. temporal autocorrelation).
 
-Some (pseudo)code and ideas for implementation were provided by the first author for `simulate_occurrences()` and `sample_observations()` on the first day.
+Some (pseudo)code and ideas for implementation were provided by the first author for `simulate_occurrences()` and `sample_observations()` on the first day:
 
 **1. Occurrence process**
 
@@ -322,7 +322,7 @@ This was the general timing of activities during the hackathon. In total, we had
 | 4   | Morning   | Code review and pull request merging.                                                                   |
 |     | Afternoon | Final presentations of all hackathon projects.                                                          |
 
-After discussion with the participants, the R package was renamed to **gcube** which stands for ‘generate cube’ since it can be used to generate biodiversity data cubes from minimal input.
+After discussion with the participants, the R package was named **gcube** which stands for ‘generate cube’ since it can be used to generate biodiversity data cubes from minimal input.
 
 Tasks were efficiently distributed along the participants ([Fig. 3](#Figure_3)). In total, we collaborated with fourteen people pushing 209 commits to the main branch and 300 commits to all branches. On main, 56 files were changed and there have been 2,856 additions and 373 deletions. By the end of the hackathon, we had a functional pkgdown website ([Fig. 4](#Figure_4)), all CMD checks passed, and we had a code coverage of 67%.
 
