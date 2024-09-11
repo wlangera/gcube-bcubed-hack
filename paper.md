@@ -577,19 +577,19 @@ ggplot() +
 
 # Discussion and future work
 ## Collaboration
-
 The methods outlined in this paper proved to be very efficient for hackathon code collaboration. A thorough preparation turned out to be crucial for working together on a single project in a large group. We recommend to set up code repository structure and provide pseudocode (architecture) beforehand if possible. This way, all participants can focus on the content of the project from the start. Defining modular tasks in advance and preparing an interactive follow-up schedule (the scrum board) also helped to ensure participant engagement and a quick and smooth onset of code development.
 
 ## Current shortcommings
+It is impossible to list all potential shortcomings for a project developed within such a short time frame, but several conceptual issues emerged during discussions. A simulation framework is only valuable if it can realistically model biological and sampling processes. This is particularly true for the occurrence process, handled by the `simulate_occurrences()` function. This function generates a new sample for each time point from the spatial pattern, which remains unchanged over time, lacking spatiotemporal autocorrelation. 
 
+**gcube** is designed to be an accessible and easy-to-use package for exploring cube-related research questions within a controlled and customisable environment. However, there is an inherent trade-off between increasing the complexity of the package and maintaining its usability. Balancing these factors is crucial to ensure that the package remains practical for researchers while still offering enough flexibility for robust and realistic simulations. Future improvements should aim to introduce more sophisticated spatiotemporal dynamics without compromising ease of use.
 
+individual based models
 
 ## Future development
-
 After working with many people on a single project, an evident first step is the need for code clean-up and unifying coding style and documentation. Due to time constrains, some documentation needs to be added or corrected and unit tests need to be added where necessary for higher code coverage. It would also be good to add vignettes that demonstrate the usage of the different functions arguments throughout the cube simulation workflow.
 
-Several (smaller) issues were posted on GitHub during the hackathon. These (and newly arising) issues will be monitored and fixed.
-Also, for future development, we will evidently aim to address the shortcommings listed in the subsection above. Other, major enhancements would be to (1) provide an efficient way, i.e. a set of functions, for creating cubes for multiple species at once, and (2) implement the virtual species approach as outlined earlier.
+Several (smaller) issues were posted on GitHub during the hackathon. These (and newly arising) issues will be monitored and fixed. Also, for future development, we will evidently aim to address the shortcommings listed in the subsection above. Other, major enhancements would be to (1) provide an efficient way, i.e. a set of functions, for creating cubes for multiple species at once, and (2) implement the virtual species approach as outlined earlier.
 
 # Links to software
 The **gcube** code repository can be found here: https://github.com/b-cubed-eu/gcube. The pkgdown website here: https://b-cubed-eu.github.io/gcube. The final commit hash of the GitHub repo at the end of the hackathon:
