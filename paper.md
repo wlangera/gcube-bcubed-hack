@@ -123,10 +123,10 @@ The B-Cubed Hackathon took place from 2-5 April 2024. This paper describes the m
 
 # Materials and Methods
 ## Technical setup
-It was *a priori* decided by the first author to build the simulation framework using the R programming language as an R package [@R2024lang], where participants could collaborate efficiently with each other via GitHub (https://github.com/).
+The first author *a priori* decided to build the simulation framework using the R programming language as an R package [@R2024lang], where participants could collaborate efficiently with each other via GitHub (https://github.com/).
 A repository for this package was prepared and a code structure was proposed for the framework (see next subsection).
 
-Common guidelines for software development (e.g. related to coding style, function naming and unit testing) were mentioned to ensure efficient collaboration as well as future maintenance and development [@huybrechts2024guidelines].
+Common guidelines for software development (e.g. related to coding style, function naming, and unit testing) were mentioned to ensure efficient collaboration as well as future maintenance and development [@huybrechts2024guidelines].
 
 ## Code architecture
 General code architecture of the package was proposed following preparation of the hackathon by the first author.
@@ -139,7 +139,7 @@ As indicated in the introduction, the simulation framework and thus the R packag
 2. detection process
 3. grid designation process
 
-For grid designation, R code was already available as the function `grid_designation()`. The focus of the hackathon was thus on the occurrence and detection processes.
+For grid designation, R code was already available as the function `grid_designation()`. Thus, the focus of the hackathon was on the occurrence and detection processes.
 
 |   Process  |        Variable        |   Dependency  |
 |------------|------------------------|---------------|
@@ -149,7 +149,7 @@ For grid designation, R code was already available as the function `grid_designa
 | detection  | sampling effort        | space, time   |
 | detection  | spatial uncertainty    | observation   |
 
-The three processes can be described in three main functions respectively `simulate_occurrences()`, `sample_observations()` and `grid_designation()`. Each main function consists of multiple supporting functions, for example per variable mentioned above or for specific subprocesses (e.g. temporal autocorrelation).
+The three processes can be described in three main functions respectively `simulate_occurrences()`, `sample_observations()` and `grid_designation()`. Each main function consists of multiple supporting functions, for example, per variable mentioned above or for specific subprocesses (e.g. temporal autocorrelation).
 
 ## Collaboration and division of tasks
 Following the information provided in the previous subsections, four types of tasks were distinguished ([Fig. 2](#Figure_2)).
@@ -171,7 +171,7 @@ Following the information provided in the previous subsections, four types of ta
 | simulate occurrences | combine supporting and helper functions in `simulate_occurrences()` function |
 | sample observations  | combine supporting and helper functions in `sample_observations()` function  |
 
-3. **Technical tasks**: These tasks encompass general code development and testing. They were required throughout the development process of the hackathon.
+3. **Technical tasks**: These tasks cover general code development and testing. They were required throughout the development process of the hackathon.
 
 |        Task       |                 Description                    |
 |-------------------|------------------------------------------------|
@@ -180,7 +180,7 @@ Following the information provided in the previous subsections, four types of ta
 | pkgdown website   | maintain pkgdown website [@pkgdown2024wickham] |
 | GitHub repository | maintain GitHub repository                     |
 
-4. **Creative tasks**: Other tasks that require out of the box or creative thinking and which are (mainly) independent from other tasks. Participants were encouraged to come up with interesting applications and links to other frameworks/concepts/software/... These tasks could be done throughout the development process of the hackathon.
+4. **Creative tasks**: Other tasks that require outside-the-box or creative thinking and which are (mainly) independent from other tasks. Participants were encouraged to come up with interesting applications and links to other frameworks/concepts/software/... These tasks could be done throughout the development process of the hackathon.
 
 |              Task              |                               Description                     |
 |--------------------------------|---------------------------------------------------------------|
@@ -191,15 +191,15 @@ Following the information provided in the previous subsections, four types of ta
 
 ![Schematic overview of the different types of tasks. See text for explanation.](./figures/task_types.png){#Figure_2 .Figure width=500px}
 
-Using a Google Form we got an overview of participants' interest in the different tasks, and an idea where a potential shortage of coverage might occur. Tasks were divided and followed up via a simple scrum methodology by using sticky notes (coloured by task type) on a board. The board was divided in four parts (from left to right): 'Ice Box', 'In Progress', 'Review', and 'Complete'. The 'Ice Box' is where all the potential tasks and ideas were stored before they were prioritized and selected for development. The 'In Progress' category contains tasks that the team was actively working on during development. The 'Review' category is for tasks that have been completed but are awaiting review, testing, or approval. The 'Complete' category includes tasks that have been reviewed, approved, and finalized. Participants were free to choose and add tasks to the scrum board, indicating the task and their name on the sticky note.
+Using a Google Form, we got an overview of participants' interest in the different tasks, and an idea where a potential shortage of coverage might occur. Tasks were divided and followed up via a simple scrum methodology by using sticky notes (coloured by task type) on a board. The board was divided into four parts (from left to right): 'Ice Box', 'In Progress', 'Review', and 'Complete'. The 'Ice Box' is where all the potential tasks and ideas were stored before they were prioritized and selected for development. The 'In Progress' category contains tasks that the team was actively working on during development. The 'Review' category is for tasks that have been completed but are awaiting review, testing, or approval. The 'Complete' category includes tasks that have been reviewed, approved, and finalised. The participants were free to choose and add tasks to the scrum board, indicating the task and their name on the sticky note.
 
 # Results
 ## Collaboration
-This was the general timing of activities during the hackathon. In total, we had about 6 half days of coding time.
+This was the general timing of activities during the hackathon. In total, we had about 6 half-days of coding time.
 
 | Day | Part      | Activities                                                                                              |
 |-----|-----------|---------------------------------------------------------------------------------------------------------|
-| 1   | Morning   | General hackathon introduction and presentations.                                                       |
+| 1   | Morning   | General introduction and presentations of the hackathon.                                                       |
 |     | Afternoon | Create project group. Acquaintance with participants and presentation of the objectives of the project. |
 |     |           |                                                                                                         |
 | 2   | Morning   | Division of tasks and start of code development.                                                        |
@@ -211,7 +211,7 @@ This was the general timing of activities during the hackathon. In total, we had
 | 4   | Morning   | Code review and pull request merging.                                                                   |
 |     | Afternoon | Final presentations of all hackathon projects.                                                          |
 
-After discussion with the participants, the R package was named **gcube** which stands for ‘generate cube’ since it can be used to generate biodiversity data cubes from minimal input.
+After discussion with the participants, the R package was named **gcube**, which stands for ‘generate cube’ since it can be used to generate biodiversity data cubes from minimal input.
 
 Tasks were efficiently distributed along the participants ([Fig. 3](#Figure_3)). In total, we collaborated with fourteen people pushing 209 commits to the main branch and 300 commits to all branches. On main, 56 files were changed and there have been 2,856 additions and 373 deletions. By the end of the hackathon, we had a functional pkgdown website ([Fig. 4](#Figure_4)), all CMD checks passed, and we had a code coverage of 67%.
 
@@ -220,17 +220,17 @@ Tasks were efficiently distributed along the participants ([Fig. 3](#Figure_3)).
 ![Overview of the **gcube** pkgdown website.](./figures/pkgdown_site.png){#Figure_4 .Figure}
 
 ## R package development
-The biodiversity data cube simulation workflow of **gcube** is divided in three steps or processes:
+The biodiversity data cube simulation workflow of **gcube** is divided into three steps or processes:
 
 1.  Occurrence process
 2.  Detection process
 3.  Grid designation process
 
-The three processes are executed by three main functions `simulate_occurrences()`, `sample_observations()` and `grid_designation()`, respectively. The functions are designed such that a single polygon as input is enough to go through this workflow using default arguments. An example workflow is given in the next section. In this subsection, we give a more technical overview of the functions that were developed. The three functions all have a `seed` argument used to allow for reproducible results. If `NA` (the default), no seed is used.
+The three processes are executed by three main functions `simulate_occurrences()`, `sample_observations()`, and `grid_designation()`, respectively. The functions are designed such that a single polygon as input is enough to go through this workflow using default arguments. An example workflow is given in the next section. In this subsection, we give a more technical overview of the functions that were developed. The three functions all have a `seed` argument used to allow reproducible results. If `NA` (the default), no seed is used.
 
 **1. Occurrence process**
 
-The `simulate_occurrences()` function generates occurrences of a species within a given spatial and/or temporal extend.
+The `simulate_occurrences()` function generates occurrences of a species within a given spatial and/or temporal span.
 
 ``` r
 simulate_occurrences(
@@ -244,7 +244,7 @@ simulate_occurrences(
 )
 ```
 
-The input (`species_range`) should be an sf object with POLYGON geometry indicating the spatial extend to simulate occurrences.
+The input (`species_range`) should be an sf object with POLYGON geometry indicating the spatial extension to simulate occurrences.
 
 The temporal component of this function is executed by the `simulate_timeseries()` supporting function.
 
@@ -258,7 +258,7 @@ simulate_timeseries(
 )
 ```
 
-The initial number of occurrences (`initial_average_occurrences`) and temporal trend function (`temporal_function`) generate a number of occurrences for each time point (total number of time points is given by `n_time_points`). If the temporal function is `NA` (default), it samples `n_time_points` times from a Poisson distribution with average equal to `initial_average_occurrences`. You can also specify a function which generates a trend in number of occurrences over time. This can be the internal function `simulate_random_walk()` or a custom function that takes `initial_average_occurrences` and `n_time_points` as arguments. Additional arguments for the temporal function can be passed to the ellipsis argument (`...`). The specified temporal function calculates a number of occurrences for each time point according to a certain function (e.g. a random walk in case of `temporal_function = simulate_random_walk`) and draw this from a Poisson distribution
+The initial number of occurrences (`initial_average_occurrences`) and the temporal trend function (`temporal_function`) generate a number of occurrences for each time point (the total number of time points is given by `n_time_points`). If the temporal function is `NA` (default), it samples `n_time_points` times from a Poisson distribution with an average equal to `initial_average_occurrences`. You can also specify a function which generates a trend in number of occurrences over time. This can be the internal function `simulate_random_walk()` or a custom function that takes `initial_average_occurrences` and `n_time_points` as arguments. Additional arguments for the temporal function can be passed to the ellipsis argument (`...`). The specified temporal function calculates a number of occurrences for each time point according to a certain function (e.g. a random walk in case of `temporal_function = simulate_random_walk`) and draws this from a Poisson distribution using `stats::rpois()` [@R2024lang].
 
 The spatial component of `simulate_occurrences()` is executed by the `create_spatial_pattern()` and `sample_occurrences_from_raster()` supporting functions. 
 
@@ -282,11 +282,11 @@ sample_occurrences_from_raster(
 )
 ```
 
-The raster output of `create_spatial_pattern()` is then used as input for `sample_occurrences_from_raster()` (argument `raster`). From this raster, it samples a number of occurrences (argument `time_series`) as provided by `simulate_timeseries()` for each time point using `terra::spatSample()` [@terra2024hijmans]. The final result is thus a number of occurrences sampled from a spatial pattern for multiple time points which is passed as output for `simulate_occurrences()`.
+The raster output of `create_spatial_pattern()` is then used as input for `sample_occurrences_from_raster()` (argument `raster`). From this raster, it samples a number of occurrences (argument `time_series`) as provided by `simulate_timeseries()` for each time point using `terra::spatSample()` [@terra2024hijmans]. The final result is thus a number of occurrences sampled from a spatial pattern for multiple time points that are passed as output for `simulate_occurrences()`.
 
 **2. Detection process**
 
-We have our occurrences, but not all occurrences are generally observed. The detection of occurrences depends on the detection probability of a species and the sampling bias (includes both sampling bias and effort). This process is simulated using the `sample_observations()` function.
+We have our occurrences, but not all occurrences are generally observed. The detection of occurrences depends on the detection probability of a species and the sampling bias (which includes both sampling bias and effort). This process is simulated using the `sample_observations()` function.
 
 ``` r
 sample_observations(
@@ -300,10 +300,10 @@ sample_observations(
 )
 ```
 
-Detection probability (`detection_probability`) is passed as a numeric value between 0 and 1. For sampling bias there are three options specified in `sampling_bias` (cf. @leroy2016virtualspecies).
+Detection probability (`detection_probability`) is passed as a numeric value between 0 and 1. For sampling bias, there are three options specified in `sampling_bias` (cf. @leroy2016virtualspecies).
 
 1. With `"no_bias"`, only the detection probability value decides whether an occurrence is observed or not. If `detection_probability = 1` and `sampling_bias = "no_bias"`, all occurrences are detected.
-2. With `"polygon"`, bias weights depend on their location inside or outside a given polygon with a certain bias strength. This is accomplished by the supporting function `apply_polygon_sampling_bias()`.
+2. With `"polygon"`, bias weights depend on their location inside or outside a given polygon with a certain bias strength. This is achieved by the supporting function `apply_polygon_sampling_bias()`.
 
 ``` r
 apply_polygon_sampling_bias(
@@ -315,7 +315,7 @@ apply_polygon_sampling_bias(
 
 The function adds a sampling bias weight column to an sf object with POINT geometry containing the occurrences (`occurrences_sf`). This column contains the sample probability based on bias strength `bias_strength` within a given polygon `bias_area`. The bias strength is the strength of the bias to be applied in the biased area (as a multiplier). Above 1, the area will be oversampled. Below 1, the area will be undersampled. For example, a value of 50 will result in 50 times more samples within the `bias_area` than outside. Conversely, a value of 0.5 will result in half less samples.
 
-3. With `"manual"`, bias weights depend on their location inside grid cells of a given grid where each cell has its own value. This is accomplished by the supporting function `apply_manual_sampling_bias()`.
+3. With `"manual"`, bias weights depend on their location inside grid cells of a given grid where each cell has its own value. This is achieved by the supporting function `apply_manual_sampling_bias()`.
 
 ``` r
 apply_manual_sampling_bias(
@@ -328,7 +328,7 @@ The function adds a sampling bias weight column to an sf object with POINT geome
 
 `sample_observations()` combines detection probability and sampling bias weight to a single value `p` as a product and uses this to draw for each occurrence from `stats::rbinom(1, 1, p)` [@R2024lang] to decide whether an occurrence is observed or not.
 
-To mimic real life data collection, we can select observed occurrences and add coordinate uncertainty with the `add_coordinate_uncertainty()` function. This is optional.
+To mimic real-life data collection, we can select observed occurrences and add coordinate uncertainty with the `add_coordinate_uncertainty()` function. This is optional.
 
 ``` r
 add_coordinate_uncertainty(
@@ -337,11 +337,11 @@ add_coordinate_uncertainty(
 )
 ```
 
-This is done by adding an additional column to the observed occurrences (`observations`). This column contains numeric values (passed to `coords_uncertainty_meters` as one value or a vector of values) indicating the coordinate uncertainty in meters around each observation.
+This is done by adding an additional column to the observed occurrences (`observations`). This column contains numeric values (passed to `coords_uncertainty_meters` as one value or a vector of values) that indicate the coordinate uncertainty in metres around each observation.
 
 **3. Grid designation process**
 
-Now that we have our observations, we designate them to a grid while taking into account the coordinate uncertainty in meters around the observation if present. This function was already developed by the first author before the hackathon started, but is given here for the sake of completeness.
+Now that we have our observations, we designate them to a grid while taking into account the coordinate uncertainty in metres around the observation, if present. This function was already developed by the first author before the hackathon started, but is given here for the sake of completeness.
 
 ``` r
 grid_designation(
@@ -355,11 +355,11 @@ grid_designation(
 )
 ```
 
-This function designates observations (`observations`) to cells of a given grid (`grid`) to create a data cube. `id_col` specifies the column name of the column with unique ids for each grid cell. If `id_col = "row_names"` (the default), a new column `cell_code` is created where the row names represent the unique ids. If `aggregate = TRUE` (default), the data cube is returned in aggregated form (grid with number of observations per grid cell). Otherwise, return sampled points in uncertainty circle. The randomisation method, specified with `randomisation`, is used for sampling within uncertainty circle around each observation. By default `"uniform"` which means each point uncertainty circle has an equal probability to be selected. If no coordinate uncertainty is present, the function takes the point itself for designation. The other option is `"normal"` where a point is sampled from a bivariate Normal distribution with means equal to the observation point and the variance equal to (-`coordinateUncertaintyInMeters`^2) / (2 * log(1 - `p_norm`)) such that `p_norm` % of all possible samples from this Normal distribution fall within the uncertainty circle. `p_norm` is only used if `randomisation = "normal"` and has the default value of 0.95. Uniform is the standard method to create biodiversity data cubes. The normal randomisation is an experimental feature.
+This function designates observations (`observations`) to cells of a given grid (`grid`) to create a data cube. `id_col` specifies the column name of the column with unique ids for each grid cell. If `id_col = "row_names"` (the default), a new column `cell_code` is created where the row names represent the unique ids. If `aggregate = TRUE` (default), the data cube is returned in aggregated form (grid with number of observations per grid cell). Otherwise, return the sampled points in their uncertainty circle. The randomisation method, specified with `randomisation`, is used for sampling within uncertainty circle around each observation. By default `"uniform"` which means each point uncertainty circle has an equal probability to be selected. If no coordinate uncertainty is present, the function takes the point itself for designation. The other option is `"normal"` where a point is sampled from a bivariate Normal distribution with means equal to the observation point and the variance equal to (-`coordinateUncertaintyInMeters`^2) / (2 * log(1 - `p_norm`)) such that `p_norm` % of all possible samples from this Normal distribution fall within the uncertainty circle. `p_norm` is only used if `randomisation = "normal"` and has the default value of 0.95. Uniform is the standard method to create biodiversity data cubes. The normal randomisation is an experimental feature.
 
-The final output is (`aggregate = TRUE`) an sf object with POLYGON geometry containing the grid cells, an `n` column with the number of observations per grid cell, and a `min_coord_uncertainty` column with the minimum coordinate uncertainty per grid cell. If `aggregate = FALSE`, an sf object with POINT geometry containing the sampled observations within the uncertainty circles, and a `coordinateUncertaintyInMeters` column with the coordinate uncertainty for each observation.
+The final output is (`aggregate = TRUE`) an sf object with POLYGON geometry containing the grid cells, an `n` column with the number of observations per grid cell, and a `min_coord_uncertainty` column with the minimum coordinate uncertainty per grid cell. If `aggregate = FALSE`, an sf object with POINT geometry containing the sampled observations within the uncertainty circles, and a column `coordinateUncertaintyInMeters` with the coordinate uncertainty for each observation.
 
-The following imports and suggests were used. Packages listed under 'imports' are essential for the package to function and are automatically loaded when **gcube** is loaded. Packages listed under 'suggests' are not essential for the basic functionality of the package but are useful for certain optional features, examples, or tests. These packages are not automatically loaded when **gcube** is loaded.
+The following imports and suggests were used. Packages listed under 'imports' are essential for the package to function and are automatically loaded when **gcube** is loaded. Packages listed under 'suggests' are not essential for the basic functionality of the package, but are useful for certain optional features, examples, or tests. These packages are not automatically loaded when **gcube** is loaded.
 
 |   Type   |   Package    |           Source                 |
 |----------|--------------|----------------------------------|
@@ -379,11 +379,11 @@ The following imports and suggests were used. Packages listed under 'imports' ar
 | suggests | **testthat** | [@testthat2011wickham]           |
 
 ## Incorporation of virtual species to the simulation workflow
-Project 8 originally aimed to address the challenges of incomplete and unreliable biodiversity data which hinder accurate species distribution models (SDMs). By creating virtual species with known ecological characteristics, researchers can simulate and analyse the effects of spatial, temporal, and taxonomic uncertainties. This "virtual ecologist" approach helps quantify sources of error and refine modelling techniques [@zurell2010virtualecologist]. The goal is to improve conservation planning, especially for rare or endangered species, by providing more reliable predictions of species distributions under various environmental conditions, including climate change.
+Project 8 originally aimed to address the challenges of incomplete and unreliable biodiversity data that hinder accurate species distribution models (SDMs). By creating virtual species with known ecological characteristics, researchers can simulate and analyse the effects of spatial, temporal, and taxonomic uncertainties. This "virtual ecologist" approach helps quantify sources of error and refine modelling techniques [@zurell2010virtualecologist]. The goal is to improve conservation planning, especially for rare or endangered species, by providing more reliable predictions of species distributions under various environmental conditions, including climate change.
 
-At an early stage of the hackathon, it was decided to integrate the concepts and ideas developed by this group would into the cube simulation package of group 2. This decision was influenced by the existing proposal to incorporate a virtual species workflow using the **virtualspecies** package, as mentioned above. The focus was primarily on discussions, conceptualization, and experimentation with the code of both the **virtualspecies** package and the **gcube** package as it was being developed at the time.
+At an early stage of the hackathon, it was decided that the concepts and ideas developed by this group would be integrated into the cube simulation package of group 2. This decision was influenced by the existing proposal to incorporate a virtual species workflow using the **virtualspecies** package, as mentioned above. The focus was primarily on discussions, conceptualization, and experimentation with the code of both the **virtualspecies** package and the **gcube** package as it was being developed at the time.
 
-The idea of working with a virtual species approach in **gcube**, is that simulations can start from two points.
+The idea of working with a virtual species approach in **gcube** is that simulations can start from two points.
 
 1. Original **gcube** workflow: Start from empty polygon and mathematical concepts.
 2. **virtualspecies** workflow: Start from environmental data layers.
@@ -396,8 +396,8 @@ We identified the needs for future development of the virtual species approach. 
 | `convertToPA()` | presence-absence map | `occurrences_from_raster()` | `sample_observations()` |
 | `sampleOccurrences()` | sampled presence points | `virtual_occurrences_to_sf()` | `add_coordinate_uncertainty()` and/or `grid_designation()` |
 
-This was mainly conceptual and not implemented in the package yet.
-The the link functions are suggestions which can differ from actual future implementation.
+This was mainly conceptual and was not implemented in the package yet.
+The link functions are suggestions, which can differ from actual future implementation.
 
 # gcube workflow example
 This is a basic example from the README which shows the workflow for simulating a biodiversity data cube using the **gcube** package. It is an example for one time point for a single species (the default). This is not the exact README example from the hackathon, but a cleaned version from the week after.
@@ -577,32 +577,32 @@ ggplot() +
 
 # Discussion and future work
 ## Collaboration
-The methods outlined in this paper proved to be very efficient for hackathon code collaboration. A thorough preparation turned out to be crucial for working together on a single project in a large group. We recommend to set up code repository structure and provide pseudocode (architecture) beforehand if possible. This way, all participants can focus on the content of the project from the start. Defining modular tasks in advance and preparing an interactive follow-up schedule (the scrum board) also helped to ensure participant engagement and a quick and smooth onset of code development.
+The methods outlined in this paper proved to be very efficient for hackathon code collaboration. A thorough preparation turned out to be crucial for working together on a single project in a large group. We recommend to set up code repository structure and provide pseudocode (architecture) beforehand if possible. In this way, all participants can focus on the content of the project from the beginning. Defining modular tasks in advance and preparing an interactive follow-up schedule (the scrum board) also helped to ensure participant engagement and a quick and smooth start of code development.
 
-## Current shortcommings
-It is impossible to list all potential shortcomings for a project developed within such a short time frame, but several conceptual issues emerged during discussions. A simulation framework is only valuable if it can realistically model biological and sampling processes. This is particularly true for the occurrence process, handled by the `simulate_occurrences()` function. For example, this function generates a new sample for each time point from the spatial pattern, which remains unchanged over time, lacking spatiotemporal autocorrelation.
+## Current shortcomings
+It is impossible to list all potential shortcomings for a project developed within such a short time frame, but several conceptual issues emerged during discussions. A simulation framework is only valuable if it can realistically model biological and sampling processes. This is particularly true for the occurrence process, handled by the `simulate_occurrences()` function. For example, this function generates a new sample for each time point from the spatial pattern that remains unchanged over time, lacking spatiotemporal autocorrelation.
 
 **gcube** is designed to be an accessible and easy-to-use package for exploring cube-related research questions within a controlled and customisable environment. However, there is an inherent trade-off between increasing the complexity of the package and maintaining its usability. Balancing these factors is crucial to ensure that the package remains practical for researchers while still offering enough flexibility for robust and realistic simulations. Future improvements should aim to introduce more sophisticated spatiotemporal dynamics without compromising ease of use.
 
-We list some potentially useful references here without going to much into detail:
+We list some potentially useful references here without going too much into detail:
 
-- Instead of sampling from a Poisson distribution using `stats::rpois()` [@R2024lang], we can model the number of occurrences in space and time. For example using point process models [@inlabru] or spatiotemporal GLMMs (Generalized Linear Mixed Effects Models) [@sdmTMB].
+- Instead of sampling from a Poisson distribution, we can model the number of occurrences in space and time. For example, using point process models [@inlabru] or spatiotemporal GLMMs (Generalized Linear Mixed Effects Models) [@sdmTMB].
 - Implement individual based models (on (meta)population level?), which allows for a high degree of complexity of individuals and of interactions among individuals [see e.g., @grimm2013individual].
 - Simulate random spatial point patterns [@spatstat], e.g. using a homogeneous or inhomogeneous Poisson process. This might be an alternative to the current method rather than a solution for spatiotemporal autocorrelation.
 
 ## Future development
-After working with many people on a single project, an evident first step is the need for code clean-up and unifying coding style and documentation. Due to time constrains, some documentation needs to be added or corrected and unit tests need to be added where necessary for higher code coverage. It would also be good to add vignettes that demonstrate the usage of the different functions arguments throughout the cube simulation workflow.
+After working with many people on a single project, an obvious first step is the need for code cleanup and unifying coding style and documentation. Due to time constraints, some documentation needs to be added or corrected, and unit tests need to be added where necessary for higher code coverage. It would also be good to add vignettes that demonstrate the usage of the different functions' arguments throughout the cube simulation workflow.
 
-Several (smaller) issues were posted on GitHub during the hackathon. These (and newly arising) issues will be monitored and fixed. Also, for future development, we will evidently aim to address the shortcommings listed in the subsection above. Other, major enhancements would be to (1) provide an efficient way, i.e. a set of functions, for creating cubes for multiple species at once, and (2) implement the virtual species approach as outlined earlier.
+Several (smaller) issues were posted on GitHub during the hackathon. These (and newly arising) issues will be monitored and fixed. Also, for future development, we will evidently aim to address the shortcomings listed in the subsection above. Other, major enhancements would be to (1) provide an efficient way, i.e. a set of functions, for creating cubes for multiple species at once, and (2) implement the virtual species approach as outlined earlier.
 
-Finally, an interesting package that was not noticed during the preparation or the hackathon itself is the **mobsim** package [@may2018mobsim]. This package simulates species abundance and distribution in a spatial landscape, allowing users to set properties like total individuals, species-abundance distribution, and spatial aggregation. It also provides functions to calculate biodiversity metrics, such as rarefaction curves and species–area relationships, and to simulate different sampling designs. It might be interesting to compare with and to look into the methods used by this package.
+Finally, an interesting package that was not noticed during the preparation or the hackathon itself is the **mobsim** package [@may2018mobsim]. This package simulates the abundance abundance and distribution of species in a spatial landscape, allowing users to set properties such as total individuals, species-abundance distribution, and spatial aggregation. It also provides functions to calculate biodiversity metrics, such as rarefaction curves and species–area relationships, and to simulate different sampling designs. It might be interesting to compare with and to look into the methods used by this package.
 
 # Links to software
 The **gcube** code repository can be found here: https://github.com/b-cubed-eu/gcube. The pkgdown website here: https://b-cubed-eu.github.io/gcube. The final commit hash of the GitHub repo at the end of the hackathon:
 
 https://github.com/b-cubed-eu/gcube/commit/6cceb2b229ac25d1df47a9c3a2e20b464f827e18
 
-The current package version, at the time of publishing this paper, is 0.4.0 [@langeraert2024gcube]. It contains several vignettes on the pkgdown website that explain the simulation workflow in detail. Also, functions are added that provide calculation of data cubes for multiple species at once, unit tests are added and documentation is completed.
+The current package version, at the time of publishing this paper, is 0.4.0 [@langeraert2024gcube]. It contains several vignettes on the pkgdown website that explain the simulation workflow in detail. Also, functions are added that provide calculation of data cubes for multiple species at once, unit tests are added, and documentation is completed.
 
 The B-Cubed hackathon repository can be found here: https://github.com/b-cubed-eu/hackathon-projects-2024. It contains R Markdown scripts in preparation of the event.
 
