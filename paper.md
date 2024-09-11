@@ -580,11 +580,15 @@ ggplot() +
 The methods outlined in this paper proved to be very efficient for hackathon code collaboration. A thorough preparation turned out to be crucial for working together on a single project in a large group. We recommend to set up code repository structure and provide pseudocode (architecture) beforehand if possible. This way, all participants can focus on the content of the project from the start. Defining modular tasks in advance and preparing an interactive follow-up schedule (the scrum board) also helped to ensure participant engagement and a quick and smooth onset of code development.
 
 ## Current shortcommings
-It is impossible to list all potential shortcomings for a project developed within such a short time frame, but several conceptual issues emerged during discussions. A simulation framework is only valuable if it can realistically model biological and sampling processes. This is particularly true for the occurrence process, handled by the `simulate_occurrences()` function. This function generates a new sample for each time point from the spatial pattern, which remains unchanged over time, lacking spatiotemporal autocorrelation. 
+It is impossible to list all potential shortcomings for a project developed within such a short time frame, but several conceptual issues emerged during discussions. A simulation framework is only valuable if it can realistically model biological and sampling processes. This is particularly true for the occurrence process, handled by the `simulate_occurrences()` function. For example, this function generates a new sample for each time point from the spatial pattern, which remains unchanged over time, lacking spatiotemporal autocorrelation.
 
 **gcube** is designed to be an accessible and easy-to-use package for exploring cube-related research questions within a controlled and customisable environment. However, there is an inherent trade-off between increasing the complexity of the package and maintaining its usability. Balancing these factors is crucial to ensure that the package remains practical for researchers while still offering enough flexibility for robust and realistic simulations. Future improvements should aim to introduce more sophisticated spatiotemporal dynamics without compromising ease of use.
 
-individual based models
+We list some potentially useful references here without going to much into detail:
+
+- Instead of sampling from a Poisson distribution using `stats::rpois()` [@R2024lang], we can model the number of occurrences in space and time. For example using point process models [@inlabru] or spatiotemporal GLMMs (Generalized Linear Mixed Effects Models) [@sdmTMB].
+- Implement individual based models (on (meta)population level?), which allows for a high degree of complexity of individuals and of interactions among individuals [see e.g., @grimm2013individual].
+- Simulate random spatial point patterns [@spatstat], e.g. using a homogeneous or inhomogeneous Poisson process. This might be an alternative to the current method rather than a solution for spatiotemporal autocorrelation.
 
 ## Future development
 After working with many people on a single project, an evident first step is the need for code clean-up and unifying coding style and documentation. Due to time constrains, some documentation needs to be added or corrected and unit tests need to be added where necessary for higher code coverage. It would also be good to add vignettes that demonstrate the usage of the different functions arguments throughout the cube simulation workflow.
