@@ -21,7 +21,7 @@ editor_options:
   markdown:
     wrap: 72
 authors:
-  - name: "[Ward Langeraert](https://github.com/wlangera/gcube-bcubed-hack)" 
+  - name: Ward Langeraert^[University of Somewhere]
     orcid: 0000-0002-5900-8109
     affiliation: 1
   - name: Wissam Barhdadi
