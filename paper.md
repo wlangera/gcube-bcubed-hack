@@ -79,9 +79,9 @@ affiliations:
    index: 7
  - name: Department of Mathematical Sciences, Stellenbosch University, Stellenbosch Central, Stellenbosch, South Africa
    index: 8
-date: 10 September 2024
+date: 7 October 2024
 bibliography: paper.bib
-authors_short: Langeraert et al.
+authors_short: Langeraert et al. (2024) Simulation of biodiversity data cubes
 group: Projects 2+8
 event: Hacking Biodiversity Data Cubes for Policy, Brussels, Belgium, 2024
 biohackathon_name: Hacking Biodiversity Data Cubes for Policy
