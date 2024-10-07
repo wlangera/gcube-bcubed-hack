@@ -17,13 +17,11 @@ output:
     fig_caption: yes        
     includes:  
       in_header: header.tex
-header-includes:
-- \newcommand{\orcidd}[1]{\href{https://orcid.org/#1}{\includegraphics[scale=0.2]{orchid_logo.png}\hspace{2mm}}}
 editor_options:
   markdown:
     wrap: 72
 authors:
-  - name: Ward Langeraert \orcidd{0000-0002-5900-8109}
+  - name: Ward Langeraert
     orcid: 0000-0002-5900-8109
     affiliation: 1
   - name: Wissam Barhdadi
