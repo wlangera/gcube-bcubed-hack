@@ -22,7 +22,6 @@ editor_options:
     wrap: 72
 authors:
   - name: Ward Langeraert
-    url: https://b-cubed.eu/b-cubed-hackathon
     orcid: 0000-0002-5900-8109
     affiliation: 1
   - name: Wissam Barhdadi
