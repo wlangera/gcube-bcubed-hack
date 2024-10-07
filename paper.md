@@ -1,5 +1,6 @@
 ---
 title: 'Unveiling ecological dynamics through simulation and visualization of biodiversity data cubes'
+title_short: 'Simulating biodiversity data cubes'
 tags:
   - simulation
   - data cubes
@@ -81,7 +82,7 @@ affiliations:
    index: 8
 date: 7 October 2024
 bibliography: paper.bib
-authors_short: Langeraert et al. (2024) Simulation of biodiversity data cubes
+authors_short: First Author \emph{et al.}
 group: Projects 2+8
 event: Hacking Biodiversity Data Cubes for Policy, Brussels, Belgium, 2024
 biohackathon_name: Hacking Biodiversity Data Cubes for Policy
