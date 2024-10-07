@@ -22,9 +22,9 @@ editor_options:
     wrap: 72
 authors:
   - name: Ward Langeraert
-    url: https://github.com/b-cubed-eu/gcube
     orcid: 0000-0002-5900-8109
     affiliation: 1
+    affiliation_url: https://github.com/b-cubed-eu/gcube
   - name: Wissam Barhdadi
     orcid: 0000-0001-9304-3971
     affiliation: 2
