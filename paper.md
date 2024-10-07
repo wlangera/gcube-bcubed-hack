@@ -9,19 +9,20 @@ tags:
   - Monte-Carlo
   - R package
 output:
-  pdf_document: default
-  word_document: default
   html_document:
     df_print: paged
+  word_document: default
+  pdf_document: default
   rmarkdown::pdf_document:
     fig_caption: yes        
     includes:  
       in_header: header.tex
+      template: default.tex
 editor_options:
   markdown:
     wrap: 72
 authors:
-  - name: Ward Langeraert
+  - name: Ward Langeraert \orcidlink{0000-0002-5900-8109}
     orcid: 0000-0002-5900-8109
     affiliation: 1
   - name: Wissam Barhdadi
